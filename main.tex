@@ -1,0 +1,130 @@
+% Préambule
+\documentclass[oneside, a5paper, 12pt]{book}
+\input{structure.tex}
+
+% Commandes personnalisées
+\newcommand{\subtitle}{Votre Quête pour l'Expérience}
+\newcommand{\edition}{2023}
+
+% Informations sur le document
+\title{En Quête d'Expérience : \\Le chemin du.de la jeune Développeur·euse}
+\author{Kevin Delfour}
+\date{\today}
+
+% Début du document
+\begin{document}
+
+% Introduction
+    % 1. Présentation du concept d'entreprise libérée
+        % a. Définition et origines
+        % b. Principes et valeurs
+        % c. Exemples d'entreprises libérées
+
+% Partie I : Les défis et problèmes liés à l'organisation des entreprises libérées
+    % 1. La communication et la prise de décision
+        % a. La difficulté de trouver un équilibre entre autonomie et cohésion
+        % b. Les risques de désorganisation et de confusion
+        % c. Les outils et méthodes pour faciliter la communication et la prise de décision
+    % 2. La gestion des ressources humaines
+        % a. Le recrutement et l'intégration des nouveaux employés
+        % b. La formation et le développement des compétences
+        % c. La gestion des conflits et des problèmes personnels
+    % 3. La performance et la rentabilité
+        % a. La mesure de la performance dans une entreprise libérée
+        % b. Les risques de perte de compétitivité et de rentabilité
+        % c. Les stratégies pour maintenir et améliorer la performance
+
+% Partie II : Les échecs et les leçons tirées des entreprises libérées
+    % 1. Les causes des échecs
+        % a. Les erreurs de mise en œuvre et de gestion
+        % b. Les résistances internes et externes
+        % c. Les limites du modèle d'entreprise libérée
+    % 2. Les leçons tirées des échecs
+        % a. L'importance de l'adaptation et de la flexibilité
+        % b. La nécessité d'un leadership fort et d'une vision claire
+        % c. La prise en compte des spécificités de chaque entreprise
+
+% Partie III : Les réfractaires au modèle d'entreprise libérée et leurs arguments
+    % 1. Les critiques du modèle d'entreprise libérée
+        % a. Les arguments économiques et financiers
+        % b. Les arguments sociaux et culturels
+        % c. Les arguments liés à la gouvernance et à la gestion
+    % 2. Les alternatives au modèle d'entreprise libérée
+        % a. Les autres formes d'organisation et de management
+        % b. Les innovations et les expérimentations en cours
+        % c. Les perspectives d'évolution du modèle d'entreprise libérée
+
+% Conclusion
+    % 1. Les enseignements à tirer pour les entreprises libérées et les autres organisations
+    % 2. Les pistes de réflexion pour l'avenir des entreprises libérées et du management en général
+
+% Front matter
+\frontmatter
+
+    % Cover
+    \input{./chapters/cover.tex}
+
+    % Édito
+    \input{./chapters/edito.tex}
+
+    % Table des matières
+    \input{./chapters/table_of_contents.tex}
+
+    % Page blanche
+    \newpage
+    \thispagestyle{empty}
+    \mbox{}
+
+% Main matter
+\mainmatter
+
+    % Introduction
+    \input{./chapters/introduction.tex}
+
+
+    % Part 01
+    \input{./chapters/part_1.tex}
+
+    % Chapter 01
+    \input{./chapters/chapter_1_1.tex}
+    % Chapter 02
+    \input{./chapters/chapter_1_2.tex}
+    % Chapter 03
+    \input{./chapters/chapter_1_3.tex}
+
+
+    % Part 02
+    \input{./chapters/part_2.tex}
+
+    % Chapter 01
+    \input{./chapters/chapter_2_1.tex}
+    % Chapter 02
+    \input{./chapters/chapter_2_2.tex}
+    % Chapter 03
+    %\input{./chapters/chapter_2_3.tex}
+
+    % Part 03
+    \input{./chapters/part_3.tex}
+
+    % Chapter 01
+    \input{./chapters/chapter_3_1.tex}
+    % Chapter 02
+    \input{./chapters/chapter_3_2.tex}
+
+
+% Back matter
+\backmatter
+
+    % Conclusion
+    \input{./chapters/conclusion.tex}
+
+    % Remerciements
+    %\input{./chapters/thanks.tex}
+
+   % Page blanche
+   \newpage
+   \thispagestyle{empty}
+   \mbox{}
+
+% Fin du document
+\end{document}
