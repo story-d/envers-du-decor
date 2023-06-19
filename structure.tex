@@ -23,8 +23,7 @@
 \usetikzlibrary{calc}
 
 \usepackage[labelformat=empty]{caption}
-\captionsetup{justification=raggedleft, font={tiny, color=gray}, singlelinecheck=false}
-
+\captionsetup{width=0.67\textwidth, justification=centering, font={tiny, color=gray}, singlelinecheck=false}
 % Contenu : texte aléatoire, boucles, images et commandes supplémentaires
 \usepackage{lipsum}
 \usepackage{pgffor}
@@ -52,3 +51,15 @@
 \fancyfoot[R]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 
+\newcommand{\listfootnotesname}{Liste des sources}% 'List of Footnotes' title
+\newlistof[chapter]{footnotes}{fnt}{\listfootnotesname}% New 'List of...' for footnotes
+
+\let\oldfootnote\footnote % Save the old \footnote{...} command
+\renewcommand\footnote[1]{% Redefine the new footnote to also add
+    'Liste des sources.
+    \refstepcounter{footnotes}% Add and step a reference to the
+    footnote/counter.
+    \oldfootnote{#1}% Make a regular footnote with added margin.
+    \addcontentsline{fnt}{footnotes}{\protect
+        \numberline{\thepart.\thefootnotes}\hspace{1,8em}#1}% Add the 'List of...' entry with a margin between the number and the note, and include the part number in the numbering.
+}
