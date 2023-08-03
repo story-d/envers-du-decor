@@ -20,10 +20,14 @@
 % Couleurs personnalisées et graphiques TikZ
 \usepackage[dvipsnames]{xcolor}
 \usepackage{tikz}
+\usepackage{microtype}
+\usepackage{GS1}
+\usepackage{qrcode}
 \usetikzlibrary{calc}
 
 \usepackage[labelformat=empty]{caption}
-\captionsetup{width=0.67\textwidth, justification=centering, font={tiny, color=gray}, singlelinecheck=false}
+\captionsetup{justification=raggedleft, font={tiny, color=gray}, singlelinecheck=false}
+
 % Contenu : texte aléatoire, boucles, images et commandes supplémentaires
 \usepackage{lipsum}
 \usepackage{pgffor}
@@ -54,12 +58,23 @@
 \newcommand{\listfootnotesname}{Liste des sources}% 'List of Footnotes' title
 \newlistof[chapter]{footnotes}{fnt}{\listfootnotesname}% New 'List of...' for footnotes
 
+\newcommand{\insertImage}[2]{
+    \markboth{}{}
+    \begin{figure}[H]
+        \center
+        \includegraphics[keepaspectratio, width=\textwidth, height=\textheight]{images/#1}
+        \caption{#2}
+    \end{figure}
+    \newpage
+}
+
 \let\oldfootnote\footnote % Save the old \footnote{...} command
-\renewcommand\footnote[1]{% Redefine the new footnote to also add
-    'Liste des sources.
-    \refstepcounter{footnotes}% Add and step a reference to the
-    footnote/counter.
+\renewcommand\footnote[1]{
     \oldfootnote{#1}% Make a regular footnote with added margin.
     \addcontentsline{fnt}{footnotes}{\protect
         \numberline{\thepart.\thefootnotes}\hspace{1,8em}#1}% Add the 'List of...' entry with a margin between the number and the note, and include the part number in the numbering.
 }
+
+\makeatletter
+\@addtoreset{chapter}{part}
+\makeatother

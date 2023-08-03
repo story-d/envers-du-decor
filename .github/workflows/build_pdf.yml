@@ -1,4 +1,4 @@
-name: Build PDF
+name: Build PDF and EPUB
 
 on:
   push:
@@ -28,6 +28,13 @@ jobs:
           if-no-files-found: error
           archive_format: none
 
+      - name: Install pandoc
+        run: sudo apt-get install -y pandoc
+
+      - name: Convert LaTeX to EPUB
+        run: |
+          pandoc main.tex --epub-cover-image=images/cover.png -o  ebook_entreprise_liberee_l_envers_du_decor.epub
+
       - name: Generate tag and release names
         id: generate_names
         run: |
@@ -45,6 +52,17 @@ jobs:
           draft: false
           prerelease: false
       
+      - name: Upload EPUB Release Asset
+        id: upload-release-asset-epub
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_PRIVATE_TOKEN_FOR_BEHIND_THE_SCENES_EBOOK }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ebook_entreprise_liberee_l_envers_du_decor.epub
+          asset_name: ebook_entreprise_liberee_l_envers_du_decor.epub
+          asset_content_type: application/epub+zip
+
       - name: Rename PDF
         run: mv ebook_entreprise_liberee_l_envers_du_decor-*.pdf ebook_entreprise_liberee_l_envers_du_decor.pdf
 

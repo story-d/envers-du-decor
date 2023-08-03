@@ -55,7 +55,6 @@
 % c. Les perspectives d'évolution du modèle d'entreprise libérée
 
 % Partie IV : L'expérience humaine dans les entreprises libérées
-
 % 1 : Les expériences des employés
 % a. L'impact de l'autonomie sur l'engagement des employés
 % b. Gestion des défis et des conflits dans un environnement de travail libéré
@@ -69,6 +68,20 @@
 % b. Relation avec les fournisseurs et les partenaires commerciaux
 % c. Impact sur la communauté locale et la société en général
 
+
+% Partie V : Analyse Sociétale et Éducative des Défis de la Mise en Place d'une Entreprise Libérée
+% 1 : Normes Sociales et Culturelles
+% a Les attentes sociétales du leadership et de la hiérarchie
+% b La résistance culturelle au changement
+% c Les valeurs sociales qui soutiennent ou entravent le modèle d'entreprise libérée
+% 2 : Système Éducatif et Formation
+% a La formation traditionnelle en management et leadership
+% b L'impact de l'éducation sur l'adoption de nouveaux modèles de gestion
+% c L'éducation et la formation nécessaires pour soutenir une entreprise libérée
+%  3 : Études de Cas et Analyses Concrètes
+%  a Exemples d'entreprises qui ont surmonté ou échoué à cause de ces défis sociétaux et éducatifs
+% b Analyse des leçons apprises et des stratégies réussies
+
 % Conclusion
 % 1. Les enseignements à tirer pour les entreprises libérées et les autres organisations
 % 2. Les pistes de réflexion pour l'avenir des entreprises libérées et du management en général
@@ -76,87 +89,23 @@
 % Front matter
 \frontmatter
 
-    % Cover
-    \input{./chapters/cover.tex}
+% Cover
+\pagenumbering{gobble}
+\input{./parts/cover.tex}
 
-    % Édito
-    \input{./chapters/edito.tex}
+\newpage
+\thispagestyle{empty} % Supprime les en-têtes et pieds de page sur cette page
+\mbox{}
+% Page blanche
 
-    % Table des matières
-    \input{./chapters/table_of_contents.tex}
+% Interior cover
+\input{./parts/interior_cover.tex}
 
-    % Page blanche
-    \newpage
-    \thispagestyle{empty}
-    \mbox{}
+% Corpus
+\input{./parts/corpus.tex}
 
-% Main matter
-\mainmatter
-
-    % Introduction
-    \input{./chapters/introduction.tex}
-
-
-    % Part 01
-    \input{./chapters/part_1.tex}
-
-    % Chapter 01
-    \input{./chapters/chapter_1_1.tex}
-    % Chapter 02
-    \input{./chapters/chapter_1_2.tex}
-    % Chapter 03
-    \input{./chapters/chapter_1_3.tex}
-
-
-    % Part 02
-    \input{./chapters/part_2.tex}
-
-    % Chapter 01
-    \input{./chapters/chapter_2_1.tex}
-    % Chapter 02
-    \input{./chapters/chapter_2_2.tex}
-    % Chapter 03
-    %\input{./chapters/chapter_2_3.tex}
-
-    % Part 03
-    \input{./chapters/part_3.tex}
-
-    % Chapter 01
-    \input{./chapters/chapter_3_1.tex}
-    % Chapter 02
-    \input{./chapters/chapter_3_2.tex}
-
-    % Part 04
-    \input{./chapters/part_4.tex}
-
-    % Chapter 01
-    \input{./chapters/chapter_4_1.tex}
-    % Chapter 03
-    \input{./chapters/chapter_4_2.tex}
-    % Chapter 03
-    \input{./chapters/chapter_4_3.tex}
-
-
-% Back matter
-\backmatter
-
-    % Conclusion
-    \input{./chapters/conclusion.tex}
-
-    % Remerciements
-    \input{./chapters/thanks.tex}
-
-    \newpage
-
-    \listoffigures
-
-    \newpage
-    
-    \listoffootnotes 
-    
-    \newpage
-    \thispagestyle{empty}
-    \mbox{}
+% Back cover
+\input{./parts/back_cover.tex}
 
 % Fin du document
 \end{document}

@@ -1,0 +1,25 @@
+\newpage
+% ---- Couverture
+% Insert the image as the background for the cover page
+\begin{tikzpicture}[overlay,remember picture]
+    \node[inner sep=0pt, anchor=south west] at (current page.south west) {
+        \includegraphics[keepaspectratio, width=\paperwidth]{images/375669df-73f6-4168-9295-19bef29746b5.png}
+    };
+
+    % White frame with 0.33 opacity
+    \fill[white, opacity=0.33] (current page.south west) rectangle (current page.south east |- current page.center);
+
+    % Title
+    \node[align=center] at ($(current page.center)+(0,-5.5)$)
+    {
+    {\fontsize{45}{72} \fontfamily{cmr}\selectfont \textcolor{black}{\textbf{L'envers du décor}}}\\[0.5cm]
+    {\fontsize{30}{72} \fontfamily{cmr}\selectfont \textcolor{black}{\textbf{des Entreprises}}}\\[0.25cm]
+    {\fontsize{45}{72} \fontfamily{cmr}\selectfont \textcolor{black}{\textbf{Libérées}}}
+    };
+
+    % Author
+    \node[align=center] at ($(current page.center)+(0,-10)$)
+    {
+        {\fontsize{12}{19.2} \textcolor{black}{\selectfont {Kevin Delfour}}}\\[3pt]
+    };
+\end{tikzpicture}
