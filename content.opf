@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<package xmlns="http://www.idpf.org/2007/opf" unique-identifier="dcidid" version="3.0"> 
+<metadata 
+xmlns:dc="http://purl.org/dc/elements/1.1/" 
+xmlns:opf="http://www.idpf.org/2007/opf"> 
+
+<dc:title>L’envers du décor des Entreprise libérée</dc:title> 
+<dc:language>fr</dc:language> 
+<dc:identifier id="dcidid" >000-00-000-0000-0</dc:identifier> 
+<dc:creator>Kevin Delfour</dc:creator> 
+
+<dc:date>2023-08-04T14:44:00Z</dc:date>  
+<meta property="dcterms:modified">2023-08-04T14:44:00Z</meta> 
+<dc:publisher >Kevin Delfour</dc:publisher > 
+<dc:date opf:event='original-publication' >2023</dc:date > 
+<meta property="rendition:layout" >pre-paginated</meta > 
+<meta property="rendition:orientation" >landscape</meta > 
+<meta property="rendition:spread" >none</meta ></metadata>   
+<manifest> 
+<item id="ncx" href="epub.ncx" media-type="application/x-dtbncx+xml" /> 
+<item id="stylesheet" href="epub.css" media-type="text/css"/> 
+<item id="file1"  href="epub.xhtml" media-type="application/xhtml+xml" /> 
+  
+<item id="cover-image" properties="cover-image" href="images/cover.png" media-type="image/png" />
+<item id='epubpa1_xhtml' href='epubpa1.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch1_xhtml' href='epubch1.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch2_xhtml' href='epubch2.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch3_xhtml' href='epubch3.xhtml' media-type='application/xhtml+xml' />
+<item id='epubpa2_xhtml' href='epubpa2.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch4_xhtml' href='epubch4.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch5_xhtml' href='epubch5.xhtml' media-type='application/xhtml+xml' />
+<item id='epubpa3_xhtml' href='epubpa3.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch6_xhtml' href='epubch6.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch7_xhtml' href='epubch7.xhtml' media-type='application/xhtml+xml' />
+<item id='epubpa4_xhtml' href='epubpa4.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch8_xhtml' href='epubch8.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch9_xhtml' href='epubch9.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch10_xhtml' href='epubch10.xhtml' media-type='application/xhtml+xml' />
+<item id='epubpa5_xhtml' href='epubpa5.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch11_xhtml' href='epubch11.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch12_xhtml' href='epubch12.xhtml' media-type='application/xhtml+xml' />
+<item id='epubch13_xhtml' href='epubch13.xhtml' media-type='application/xhtml+xml' />
+<item id='images92b04921-76d0-42f4-a88e-21248e3e9194_png' href='images/92b04921-76d0-42f4-a88e-21248e3e9194.png' media-type='image/png' />
+<item id='images3c1da1ab-a826-4f5f-b681-6318fb79aca0_png' href='images/3c1da1ab-a826-4f5f-b681-6318fb79aca0.png' media-type='image/png' />
+<item id='imagesfde831f5-1dd5-468b-8682-1d0e38a05cc0_png' href='images/fde831f5-1dd5-468b-8682-1d0e38a05cc0.png' media-type='image/png' />
+<item id='images775323db-ad9f-460e-baa7-57c944b1bc0d_png' href='images/775323db-ad9f-460e-baa7-57c944b1bc0d.png' media-type='image/png' />
+<item id='imagescfe76e97-852f-4871-9dda-e3a597c43a27_png' href='images/cfe76e97-852f-4871-9dda-e3a597c43a27.png' media-type='image/png' />
+<item id='imagesb67bf4ba-580b-4672-b687-8310d1ca30f5_png' href='images/b67bf4ba-580b-4672-b687-8310d1ca30f5.png' media-type='image/png' />
+<item id='imagesc84dac79-ff25-4546-b995-f36426a4b677_png' href='images/c84dac79-ff25-4546-b995-f36426a4b677.png' media-type='image/png' />
+<item id='images6b670e2e-7b15-43a0-be2a-03c5853f4a58_png' href='images/6b670e2e-7b15-43a0-be2a-03c5853f4a58.png' media-type='image/png' />
+<item id='images07be4a47-3beb-4a74-a68f-7c7382e8930f_png' href='images/07be4a47-3beb-4a74-a68f-7c7382e8930f.png' media-type='image/png' />
+<item id='images0411efc2-c833-43fb-9675-cb74860ca78d_png' href='images/0411efc2-c833-43fb-9675-cb74860ca78d.png' media-type='image/png' />
+<item id='epub0x_svg' href='epub0x.svg' media-type='image/svg+xml' />
+</manifest> 
+   
+<spine toc="ncx"> 
+<itemref idref="file1" /> 
+  
+<itemref idref="epubpa1_xhtml" linear="no" />
+<itemref idref="epubch1_xhtml" linear="no" />
+<itemref idref="epubch2_xhtml" linear="no" />
+<itemref idref="epubch3_xhtml" linear="no" />
+<itemref idref="epubpa2_xhtml" linear="no" />
+<itemref idref="epubch4_xhtml" linear="no" />
+<itemref idref="epubch5_xhtml" linear="no" />
+<itemref idref="epubpa3_xhtml" linear="no" />
+<itemref idref="epubch6_xhtml" linear="no" />
+<itemref idref="epubch7_xhtml" linear="no" />
+<itemref idref="epubpa4_xhtml" linear="no" />
+<itemref idref="epubch8_xhtml" linear="no" />
+<itemref idref="epubch9_xhtml" linear="no" />
+<itemref idref="epubch10_xhtml" linear="no" />
+<itemref idref="epubpa5_xhtml" linear="no" />
+<itemref idref="epubch11_xhtml" linear="no" />
+<itemref idref="epubch12_xhtml" linear="no" />
+<itemref idref="epubch13_xhtml" linear="no" /> 
+</spine> 
+</package> 

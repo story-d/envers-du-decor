@@ -1,71 +1,66 @@
 % Configuration des marges
-\usepackage[top=0.8in, bottom=0.8in, left=0.8in, right=0.8in]{geometry}
+\usepackage[margin=0.8in]{geometry} % Définit les marges du document
 
 % Personnalisation des titres de section et table des matières
-\usepackage{sectsty}
-\usepackage{tocloft}
-\usepackage[pdftex, pdfauthor={Kevin Delfour}, pdftitle={L'envers du décor des Entreprises libérée}, pdfkeywords={entreprise, libérées, utopie, envers, décor}, hidelinks]{hyperref}
+\usepackage{sectsty, tocloft, hyperref} % Importe les packages nécessaires pour personnaliser les titres et la table des matières
+\hypersetup{
+    pdfauthor={Kevin Delfour}, % Définit l'auteur du PDF
+    pdftitle={L'envers du décor des Entreprises libérée}, % Définit le titre du PDF
+    pdfkeywords={entreprise, libérées, utopie, envers, décor}, % Définit les mots-clés du PDF
+    hidelinks % Cache les liens dans le PDF
+}
 
 % Cadres, tailles de police et en-têtes/pieds de page personnalisés
-\usepackage{framed}
-\usepackage{anyfontsize}
-\usepackage{fancyhdr}
+\usepackage{framed, anyfontsize, fancyhdr} % Importe les packages nécessaires pour personnaliser les cadres, les tailles de police et les en-têtes/pieds de page
 
 % Police Garamond et paramètres de langue
-\usepackage{ebgaramond}
-\usepackage[french]{babel}
-\usepackage[T1]{fontenc}
-\usepackage{float}
+\usepackage{ebgaramond, float} % Importe la police Garamond et le package float pour la gestion des flottants
+\usepackage[french]{babel} % Définit le français comme langue principale
+\usepackage[T1]{fontenc} % Utilise la codification de caractères T1
 
 % Couleurs personnalisées et graphiques TikZ
-\usepackage[dvipsnames]{xcolor}
-\usepackage{tikz}
-\usepackage{microtype}
-\usepackage{GS1}
-\usepackage{qrcode}
-\usetikzlibrary{calc}
+\usepackage[dvipsnames]{xcolor} % Importe le package xcolor avec les noms de couleurs dvips
+\usepackage{tikz, microtype, GS1, qrcode} % Importe les packages nécessaires pour les graphiques TikZ, la microtypographie, les codes-barres GS1 et les QR codes
+\usetikzlibrary{calc} % Utilise la bibliothèque calc de TikZ pour les calculs de coordonnées
 
-\usepackage[labelformat=empty]{caption}
-\captionsetup{justification=raggedleft, font={tiny, color=gray}, singlelinecheck=false}
+\usepackage[labelformat=empty]{caption} % Importe le package caption avec un format de label vide
+\captionsetup{justification=raggedleft, font={tiny, color=gray}, singlelinecheck=false} % Configure les légendes des figures
 
 % Contenu : texte aléatoire, boucles, images et commandes supplémentaires
-\usepackage{lipsum}
-\usepackage{pgffor}
-\usepackage{graphicx}
-\usepackage{etoolbox}
+\usepackage{lipsum, pgffor, graphicx, etoolbox} % Importe les packages nécessaires pour le contenu : texte aléatoire, boucles, images et commandes supplémentaires
 
 % Configuration de la mise en page
-\renewcommand{\familydefault}{\sfdefault}
-\setlength{\parskip}{\baselineskip}
-\setlength{\parindent}{0pt}
+\renewcommand{\familydefault}{\sfdefault} % Utilise la police sans serif par défaut
+\setlength{\parskip}{\baselineskip} % Définit l'espacement entre les paragraphes
+\setlength{\parindent}{0pt} % Supprime l'indentation des paragraphes
 
 % Configuration de la table des matières
-\setcounter{tocdepth}{2}
-\renewcommand{\cftpartfont}{\normalfont\bfseries\Large}
-\renewcommand{\cftchapfont}{\normalfont\bfseries}
-\renewcommand{\cftsecfont}{\normalfont}
-\renewcommand{\cftsubsecfont}{\normalfont}
-\renewcommand{\cftsubsubsecfont}{\normalfont\small}
+\setcounter{tocdepth}{2} % Définit la profondeur de la table des matières
+\renewcommand{\cftpartfont}{\normalfont\bfseries\Large} % Configure la police des parties dans la table des matières
+\renewcommand{\cftchapfont}{\normalfont\bfseries} % Configure la police des chapitres dans la table des matières
+\renewcommand{\cftsecfont}{\normalfont} % Configure la police des sections dans la table des matières
+\renewcommand{\cftsubsecfont}{\normalfont} % Configure la police des sous-sections dans la table des matières
+\renewcommand{\cftsubsubsecfont}{\normalfont\small} % Configure la police des sous-sous-sections dans la table des matières
 
 % Configuration des en-têtes et pieds de page personnalisés
-\pagestyle{fancy}
-\fancyhead{}
-\fancyhead[LO, L]{ \color{gray}\scriptsize\leftmark}
-\fancyfoot{}
-\fancyfoot[R]{\scriptsize\thepage}
-\renewcommand{\headrulewidth}{0pt}
+\pagestyle{fancy} % Utilise le style de page fancy
+\fancyhead{} % Supprime l'en-tête par défaut
+\fancyhead[LO, L]{ \color{gray}\scriptsize\leftmark} % Configure l'en-tête gauche
+\fancyfoot{} % Supprime le pied de page par défaut
+\fancyfoot[R]{\scriptsize\thepage} % Configure le pied de page droit
+\renewcommand{\headrulewidth}{0pt} % Supprime la ligne sous l'en-tête
 
 \newcommand{\listfootnotesname}{Liste des sources}% 'List of Footnotes' title
 \newlistof[chapter]{footnotes}{fnt}{\listfootnotesname}% New 'List of...' for footnotes
 
 \newcommand{\insertImage}[2]{
-    \markboth{}{}
+    \markboth{}{} % Supprime les marques de tête
     \begin{figure}[H]
-        \center
-        \includegraphics[keepaspectratio, width=\textwidth, height=\textheight]{images/#1}
-        \caption{#2}
+        \center % Centre l'image
+        \includegraphics[keepaspectratio, width=\textwidth, height=\textheight]{images/#1} % Insère l'image
+        \caption{#2} % Ajoute une légende à l'image
     \end{figure}
-    \newpage
+    \newpage % Crée une nouvelle page après l'image
 }
 
 \let\oldfootnote\footnote % Save the old \footnote{...} command
@@ -76,5 +71,5 @@
 }
 
 \makeatletter
-\@addtoreset{chapter}{part}
+\@addtoreset{chapter}{part} % Réinitialise le compteur de chapitres à chaque nouvelle partie
 \makeatother

@@ -20,8 +20,31 @@
 % Interior cover
 \input{./parts/interior_cover.tex}
 
+% Édito
+\input{./chapters/edito.tex}
+
+% Table des matières
+\input{./parts/table_of_contents.tex}
+
+% Page blanche
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
 % Corpus
 \input{./parts/corpus.tex}
+
+\newpage
+
+\listoffigures
+
+\newpage
+
+\listoffootnotes
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
 
 % Fin du document
 \end{document}
