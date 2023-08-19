@@ -58,10 +58,16 @@
     \begin{figure}[H]
         \center % Centre l'image
         \includegraphics[keepaspectratio, width=\textwidth, height=\textheight]{images/#1} % Insère l'image
+        \captionsetup{justification=raggedright, singlelinecheck=false} % Aligne la légende sur la gauche
         \caption{#2} % Ajoute une légende à l'image
     \end{figure}
     \newpage % Crée une nouvelle page après l'image
 }
+
+\makeatletter
+\renewcommand{\thefigure}{\@arabic\c@figure}
+\makeatother
+
 
 \let\oldfootnote\footnote % Save the old \footnote{...} command
 \renewcommand\footnote[1]{
