@@ -89,6 +89,9 @@ L'édito promet : « soulever le voile », surmenage, discrimination, **gaslight
 3. Réparer la CI pour retrouver un PDF compilé à chaque push.
 
 **Phase 2 — Tenir la promesse (le vrai travail d'auteur) :**
+
+> *Entamée : une charte de voix (`CHARTE_DE_VOIX.md`, distillée de « To be or not to be CTO » et de l'édito) et un chapitre pilote réécrit dans cette voix (`chapters/chapter_2_1.tex`, « Les causes des échecs »). Le pilote est à valider par l'auteur — y compris les emplacements `% [KEVIN : …]` réservés à ses anecdotes vécues — avant de dérouler la réécriture sur les autres chapitres.*
+
 4. Écrire le chapitre d'enquête sur les échecs documentés (Zappos, Medium, GitHub, cas français) — il peut prendre la place du `chapter_2_3` fantôme.
 5. Écrire les sections manquantes annoncées par l'édito : surmenage, discrimination, gaslighting, scalabilité.
 6. Réécrire l'édito et la conclusion (avec la section « pistes pour l'avenir »), en y injectant votre expérience personnelle de dirigeant.
