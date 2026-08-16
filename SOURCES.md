@@ -1,5 +1,13 @@
 # Traçabilité des sources
 
+> **Journal — réécriture phase 2 (août 2026).** Le corpus entier a été réécrit ; à cette occasion, les décisions ci-dessous ont été appliquées :
+> - **Supprimées** (introuvables/fabriquées) : Peshkin 2012 ; Green & Hayward 2018 ; Rodriguez B. 2014 ; Rodriguez I. 2017 ; Zerah 2014 ; Isaac H. 2015 ; Dubois 2002 ; « étude Paris-Dauphine 2017 » ; « ESCP 2018 » ; Bouvard & Rosier 2021 ; Giraud 2020 / « Institut de l'Entreprise Libérée » ; Gobillot 2019 ; « Getz 2013 leader libérateur » ; affirmations Air France et EM Lyon ; citations verbatim inventées (témoignages anonymes, citation Dupuy, citation Getz).
+> - **Remplacées/corrigées** : GitHub → Foss & Klein, MIT SMR 56(1), 2014 ; Chrono Flex → Gérard, *Le patron qui ne voulait plus être chef*, Flammarion, 2017 (titre/année corrigés) ; « Le travail en miettes » (Dujarier) → supprimé (titre de Friedmann 1956) ; Gore → Hamel, *The Future of Management*, 2007 ; Harley-Davidson → Teerlink & Ozley, *More Than a Motorcycle*, HBS Press, 2000 ; Goulston → 2009 ; Cappelli & Tavis → « The Performance Management Revolution », HBR 94(10), 2016 ; conduite du changement → Kotter, *Leading Change*, 1996 ; Dupuy → *La faillite de la pensée managériale (Lost in management 2)*, Seuil, 2015, en paraphrase ; éditions Getz/Carney harmonisées sur Crown Business 2009 (*Freedom, Inc.*) et Fayard 2017 (*L'entreprise libérée*).
+> - **Faits durcis** : « division Oxylane » retiré ; « 2e producteur européen » (Poult) reformulé ; récompense Buurtzorg adoucie (« régulièrement distinguée ») ; « étude de l'Université de Kent » retirée ; Harley présenté comme cas participatif, non libéré ; Gore présenté comme « né libre », jamais « libéré ».
+> - **Graphie unifiée** : « Chrono Flex ».
+> - Les témoignages inventés ont été remplacés par les récits publiés (Zobrist 2012, Gérard 2017) ; les emplacements `% [KEVIN : …]` appellent de vraies interviews.
+> Le tableau ci-dessous décrit l'état *avant* réécriture et sert d'archive des décisions.
+
 Inventaire de toutes les notes de bas de page du manuscrit (98 occurrences, ~55 références uniques), avec leur statut de vérification. À tenir à jour à chaque modification d'une note.
 
 **Statuts :**
