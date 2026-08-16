@@ -21,9 +21,9 @@
 
 C'est le chantier n°1. Un livre qui se veut *critique* d'un modèle à la mode sera lui-même lu de façon critique : chaque note de bas de page doit être vérifiable.
 
-- [ ] **Citation fantôme récurrente** : « Getz, I. (2009). *Liberation management: necessary disorganization for the nanosecond nineties* » — c'est le titre du livre de **Tom Peters (1992)**, attribué ici à Getz, avec des « éditeurs » fantaisistes qui changent selon le chapitre (« Favi S.A. », « Michelin »). Apparaît dans `chapters/chapter_4_1.tex:41`, `chapter_4_2.tex:19` et `:53`, `chapter_4_3.tex:35`. À supprimer ou remplacer par de vraies références.
-- [ ] **Témoignages invérifiables** : les « témoignages » d'employés/leaders de FAVI, Poult, Biocoop, La Ruche Qui Dit Oui (`chapter_4_1.tex:37-48`, `chapter_4_2.tex:43-53`, `chapter_4_3.tex:47-57`) sont des citations directes entre guillemets adossées à des notes invérifiables (« Rapport annuel de Biocoop », etc.). Deux options honnêtes : mener de **vraies interviews** (recommandé, voir §5), ou les réécrire en paraphrase clairement sourcée. Publier des verbatims inventés est un risque réputationnel et juridique.
-- [ ] **Placeholder oublié** : « l'échec de **l'entreprise X** » (`chapter_5_3.tex:90`) — un cas d'échec jamais nommé ni documenté, au cœur d'un livre censé parler d'échecs.
+- [x] **Citation fantôme récurrente** *(corrigé en phase 1)* : « Getz, I. (2009). *Liberation management: necessary disorganization for the nanosecond nineties* » — c'était le titre du livre de **Tom Peters (1992)**, attribué à Getz avec des « éditeurs » fantaisistes (« Favi S.A. », « Michelin »). Les 4 occurrences ont été remplacées par des références réelles ou neutralisées (voir `SOURCES.md`).
+- [ ] **Témoignages invérifiables** *(partiellement traité)* : les notes fabriquées (« Rapport annuel de Biocoop », etc.) ont été neutralisées en phase 1 par un marqueur « Témoignage à sourcer ». Reste la phase 2 : mener de **vraies interviews** (recommandé, voir §5) ou réécrire les verbatims en paraphrase sourcée. Ne pas publier en l'état.
+- [x] **Placeholder oublié** *(corrigé en phase 1)* : « l'échec de l'entreprise X » (`chapter_5_3.tex`) reformulé en constat générique ; un vrai cas d'échec documenté reste à écrire en phase 2.
 - [ ] **Sources douteuses du chapitre 5.2** : « Air France a mis en place des programmes d'entreprise libérée », « EM Lyon offre un programme centré sur les entreprises libérées », « Bernard Giraud, fondateur de l'Institut de l'Entreprise Libérée », études « Paris-Dauphine 2017 » et « ESCP Europe 2018 » non identifiables, « Bouvard & Rosier (2021), Les Échos » (`chapter_5_2.tex:61-116`). Chacune est à retrouver ou à couper.
 - [ ] **Faits à vérifier** :
   - GitHub 2014 et la note « Reitzig (2019), HBR » (`chapter_1_1.tex:23`) — l'épisode est réel mais le titre/l'année de l'article sont à contrôler.
@@ -33,7 +33,7 @@ C'est le chantier n°1. Un livre qui se veut *critique* d'un modèle à la mode 
   - « Étude de l'Université de Kent » adossée à une note Langfred & Moye (`chapter_4_1.tex:15`) — la note ne correspond pas à l'affirmation.
   - Les multiples éditions/années contradictoires de *Freedom, Inc.* / *Liberté & Cie* (2009, 2011, 2013, 2018 selon les chapitres) — choisir UNE édition de référence.
 - [ ] **Uniformiser le référencement** : trois styles cohabitent (note APA seule ; « (Auteur, année) » + note dans les ch. 5.1/5.2 ; références libres). Choisir un style unique. Idem pour l'orthographe **Chrono Flex / ChronoFlex / Chrono-Flex** (3 graphies dans le livre).
-- [ ] Construire un **tableau de traçabilité des sources** (une ligne par note : référence, affirmation soutenue, vérifiée O/N, lien). C'est fastidieux mais c'est ce qui séparera ce livre d'un billet de blog.
+- [x] Construire un **tableau de traçabilité des sources** *(fait en phase 1 : voir `SOURCES.md` — 98 notes inventoriées, statuts ✅/⚠️/❌ et décisions)*. Reste à traiter les lignes ⚠️ et ❌ au fil de la phase 2.
 
 ---
 
@@ -51,8 +51,8 @@ L'édito promet : « soulever le voile », surmenage, discrimination, **gaslight
 
 ## 4. 🟠 Important — Chantiers d'écriture
 
-- [ ] **Réécrire l'édito** : c'est la page la plus personnelle et la plus fautive du livre. Coquilles : « ecrire », « parceque », « vis cachés » (→ *vices cachés*), « necessite », « rélféxion », « une forme d'organisation **auquel** » (→ *à laquelle*), ponctuation. C'est aussi le meilleur passage en germe (la rencontre avec les déçus du modèle, `edito.tex:12-14`) : développer cette scène en ouverture narrative.
-- [ ] **Supprimer les doublons copiés-collés** : les paragraphes Decathlon et Harley-Davidson sont identiques mot pour mot (`chapter_5_3.tex:72-74` vs `:79-81`). Réécrire Harley-Davidson (qui, au passage, n'est pas une entreprise libérée mais un cas de management participatif — à assumer ou à couper).
+- [ ] **Réécrire l'édito** *(coquilles corrigées en phase 1 : « écrire », « parce que », « vices cachés », « nécessite », « réflexion », « à laquelle »)*. Reste la phase 2 : développer la rencontre avec les déçus du modèle (`edito.tex:12-14`) en ouverture narrative.
+- [x] **Supprimer les doublons copiés-collés** *(corrigé en phase 1)* : la section Harley-Davidson a été réécrite et assume désormais son statut de cas de gestion participative, distinct de l'entreprise libérée (source réelle à ajouter, voir `SOURCES.md`).
 - [ ] **Casser le tic « En résumé »** : quasi chaque section se termine par « En résumé / En bref / En somme / En conclusion / En définitif » (sic — *en définitive*). Garder une synthèse par *chapitre*, pas par section.
 - [ ] **Harmoniser le gabarit des chapitres** : les ch. 5.1/5.2 ont des sous-sous-sections, des citations en exergue et des synthèses intermédiaires que les autres n'ont pas. Choisir un gabarit unique.
 - [ ] **Étoffer les chapitres squelettiques** : `chapter_2_2.tex` (764 mots, aucun exemple nommé) et `chapter_2_1.tex` (816 mots) sont des dissertations abstraites dans la partie qui devrait être la plus incarnée du livre (« les échecs »).
@@ -65,16 +65,16 @@ L'édito promet : « soulever le voile », surmenage, discrimination, **gaslight
 1. **3 à 5 vraies interviews** (salarié déçu, dirigeant « libérateur », consultant, sociologue). Même courtes, elles remplaceraient les témoignages inventés et fourniraient la matière narrative promise. Vous dirigez vous-même une société en modèle libéré (4e de couverture) : votre propre retour d'expérience, honnête, est un atout unique — il est aujourd'hui totalement absent du corpus.
 2. **Des chiffres** : taux de turnover avant/après dans les cas cités, études quantitatives existantes (chaires de recherche, DARES, études Malakoff/APEC sur l'autonomie). Le livre ne contient quasiment aucune donnée chiffrée.
 3. **Un fil narratif** : ouvrir chaque partie par une scène ou un mini-cas, pas par un résumé du plan (les pages de partie actuelles paraphrasent la table des matières).
-4. **Trancher la question du chapitre 2.3** : `parts/corpus.tex:27` référence un `chapter_2_3.tex` commenté qui n'existe pas. Le plan (`main.tex:37-45`) ne prévoit que 2 chapitres en partie II → supprimer la ligne, ou en faire le chapitre « cas d'échec » du §3.
+4. ~~Trancher la question du chapitre 2.3~~ *(fait en phase 1 : la ligne morte a été supprimée de `corpus.tex`, conformément au plan qui prévoit 2 chapitres en partie II)*. Le chapitre « cas d'échec » du §3 pourra être réintroduit à cet emplacement en phase 2.
 
 ---
 
 ## 6. 🟡 Production / technique
 
-- [ ] **Titre mal accordé partout où il est en dur** : « L'envers du décor des **Entreprise libérée** » → « des entreprises libérées » (`main.tex:10`, `content.opf:7`). La 4e de couverture est correcte, elle.
+- [x] **Titre mal accordé** *(corrigé en phase 1)* : « L'envers du décor des entreprises libérées » dans `main.tex` et `content.opf`.
 - [ ] **ISBN placeholder** `000-00-000-0000-0` (`parts/back_cover.tex:26`, `content.opf:9`) — obtenir un ISBN réel (AFNIL) avant publication.
 - [ ] **Dates à rafraîchir** : `\edition{2023}` (`main.tex:7`), métadonnées EPUB datées 2023 (`content.opf`).
-- [ ] **CI obsolète** (`.github/workflows/build_pdf.yml`) : `actions/checkout@v2`, `upload-artifact@v2`, `create-release@v1` et `::set-output` sont dépréciés/désactivés depuis — le build est probablement cassé aujourd'hui. Mettre à jour (checkout@v4, upload-artifact@v4, softprops/action-gh-release) et déclencher aussi le build sur les branches de travail pour valider les PDF en continu.
+- [x] **CI obsolète** *(corrigé en phase 1)* : workflow migré vers `checkout@v4`, `latex-action@v3`, `upload-artifact@v4` et `softprops/action-gh-release@v2` (avec le `GITHUB_TOKEN` natif au lieu d'un PAT). Le build tourne désormais aussi sur les branches `claude/**` et à la demande (`workflow_dispatch`) ; la release ne part que depuis `main`. À vérifier au premier passage sur `main`.
 - [ ] **Qualité EPUB à auditer** : la conversion `pandoc main.tex` ne rendra correctement ni la couverture TikZ, ni `\insertImage`, ni `\listoffootnotes`. Générer un EPUB et le relire page à page (les métadonnées `rendition: pre-paginated / landscape` dans `content.opf` sont par ailleurs surprenantes pour un livre de texte).
 - [ ] Vérifier une compilation locale complète (`latexmk -pdf main.tex`) après chaque phase de réécriture.
 - [ ] Ajouter une **bibliographie consolidée** en fin d'ouvrage (générée depuis les notes, une fois celles-ci purgées).
