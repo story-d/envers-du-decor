@@ -144,6 +144,15 @@ blockquote {
 }
 blockquote p { text-indent: 0; }
 
+/* Appels de note : en exposant, précédés d'une fine espace,
+   sans écarter l'interligne (line-height: 0) */
+a.footnote-ref {
+  font-size: 0.72em;
+  vertical-align: super;
+  line-height: 0;
+  margin-left: 0.15em;
+}
+
 /* Notes de bas de page (rendues en fin de section par pandoc) */
 section.footnotes, div.footnotes {
   font-size: 0.85em;
