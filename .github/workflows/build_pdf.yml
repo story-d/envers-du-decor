@@ -24,12 +24,22 @@ jobs:
       - name: Rename PDF
         run: mv main.pdf ebook_entreprise_liberee_l_envers_du_decor.pdf
 
-      - name: Install pandoc
-        run: sudo apt-get update && sudo apt-get install -y pandoc
+      - name: Install pandoc and imagemagick
+        run: sudo apt-get update && sudo apt-get install -y pandoc imagemagick
 
+      # EPUB : couvertures TikZ exclues (illisibles en EPUB), images
+      # redimensionnées et converties en JPEG (le PDF, déjà construit, garde
+      # les PNG pleine résolution)
       - name: Convert LaTeX to EPUB
         run: |
-          pandoc main.tex --epub-cover-image=images/cover.png -o ebook_entreprise_liberee_l_envers_du_decor.epub
+          sed '/parts\/cover.tex/d; /back_cover.tex/d' main.tex > main_epub.tex
+          mogrify -resize '1200x1200>' images/*.png
+          mogrify -format jpg -quality 85 images/*.png
+          sed -i 's/\.png}/.jpg}/g' chapters/*.tex parts/*.tex main_epub.tex
+          pandoc main_epub.tex --epub-cover-image=images/cover.jpg \
+            --metadata lang=fr-FR --toc --toc-depth=2 \
+            -o ebook_entreprise_liberee_l_envers_du_decor.epub
+          git checkout -- chapters parts
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4

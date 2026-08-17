@@ -99,6 +99,8 @@ L'édito promet : « soulever le voile », surmenage, discrimination, **gaslight
 8. Dédoublonner les parties I/II/IV, harmoniser le gabarit et supprimer les « En résumé ».
 
 **Phase 3 — Produire :**
+
+> *Entamée (août 2026) : relecture typographique de la maquette (titre PDF, © dynamique, citation de la page intérieure corrigée, casse des titres de chapitres normalisée), audit EPUB réalisé et pipeline corrigé (langue fr-FR, couvertures TikZ exclues, images compressées : 3,5 Mo au lieu de 32), bibliographie rendue compatible PDF+EPUB, dossier `PUBLICATION.md` créé (ISBN/AFNIL, dépôt légal, diffusion, checklist bon à tirer). Restent à la main de l'auteur : ISBN réels, relecture pro, épreuve PDF, test liseuse, dépôt légal.*
 9. Relecture-correction professionnelle (ou passe outillée : Antidote + relecteur humain).
 10. Bibliographie consolidée, ISBN réel, mise à jour des métadonnées, audit EPUB, nouvelle passe sur la 4e de couverture.
 11. Bêta-lecteurs (idéalement : un partisan du modèle, un sceptique, un néophyte) avant le bon à tirer.
