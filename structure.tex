@@ -21,6 +21,10 @@
 
 % Cadres, tailles de police et en-têtes/pieds de page personnalisés
 \usepackage{framed, anyfontsize, fancyhdr}
+\usepackage{emptypage} % pages blanches (fin de chapitre) sans en-tête ni folio
+\usepackage{lettrine}  % lettrines d'ouverture de chapitre
+\setlength{\DefaultNindent}{0pt}
+\renewcommand{\LettrineFontHook}{\bfseries}
 
 % Police EB Garamond (corps du texte) et paramètres de langue
 \usepackage{ebgaramond, float}
@@ -56,6 +60,8 @@
 \widowpenalty=10000
 \displaywidowpenalty=10000
 \emergencystretch=1em
+\raggedbottom % pas de justification verticale : les pages courtes (intros de
+              % partie, fins de chapitre) restent calées en haut au lieu d'être étirées
 
 % ------------------------------------------------------------
 % Titres (parties, chapitres, sections)
@@ -71,12 +77,13 @@
   {\huge\bfseries}
 \titlespacing*{\chapter}{0pt}{0pt}{2\baselineskip}
 
-% Partie : numéro discret, titre en très grand corps
+% Partie : numéro discret, titre en très grand corps entre deux filets centrés
 \titleformat{\part}[display]
   {\centering\normalfont}
-  {\color{gray}\large\textls[120]{\MakeUppercase{\partname~\thepart}}}
+  {\color{gray}\large\scshape\textls[120]{\partname}\\[1.2em]\rule{0.45\textwidth}{0.4pt}}
   {1em}
   {\Huge\bfseries}
+  [\vspace{1.2em}\rule{0.45\textwidth}{0.4pt}]
 
 \titleformat{\section}
   {\normalfont\Large\bfseries}{\thesection}{0.6em}{}
@@ -97,12 +104,15 @@
 \renewcommand{\cftsubsecfont}{\normalfont}
 \renewcommand{\cftsubsubsecfont}{\normalfont\small}
 
-% En-têtes et pieds de page
+% En-têtes et pieds de page (recto-verso) :
+% verso = titre du livre, recto = chapitre courant ; folio à l'extérieur
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[LO, L]{\color{gray}\scriptsize\scshape\leftmark}
+\fancyhead[CE]{\color{gray}\scriptsize\scshape L'envers du décor des entreprises libérées}
+\fancyhead[CO]{\color{gray}\scriptsize\scshape\leftmark}
 \fancyfoot{}
-\fancyfoot[R]{\scriptsize\thepage}
+\fancyfoot[LE]{\scriptsize\thepage}
+\fancyfoot[RO]{\scriptsize\thepage}
 \renewcommand{\headrulewidth}{0pt}
 
 % ------------------------------------------------------------
