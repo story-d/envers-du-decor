@@ -20,9 +20,16 @@ import re
 s = open('parts/interior_cover.tex').read()
 s = re.sub(r'\\begin\{titlepage\}.*?\\end\{titlepage\}', '', s, flags=re.S)
 open('parts/interior_cover_epub_tmp.tex', 'w').write(s)
+
+# structure.tex sans la redéfinition de \footnote (mécanique de la « Liste
+# des sources » du PDF) : pandoc ne sait pas évaluer son \ifnum et laisse
+# fuir « >0 » dans le texte de chaque note
+t = open('structure.tex').read()
+t = re.sub(r'\\let\\oldfootnote\\footnote.*?\n\}\n', '', t, flags=re.S)
+open('structure_epub_tmp.tex', 'w').write(t)
 PYEOF
 sed '/parts\/cover.tex/d; /back_cover.tex/d; s|./parts/interior_cover.tex|./parts/interior_cover_epub_tmp.tex|' parts/book_body.tex > parts/book_body_epub_tmp.tex
-sed 's|./parts/book_body.tex|./parts/book_body_epub_tmp.tex|' main.tex > main_epub_tmp.tex
+sed 's|./parts/book_body.tex|./parts/book_body_epub_tmp.tex|; s|\\input{structure.tex}|\\input{structure_epub_tmp.tex}|' main.tex > main_epub_tmp.tex
 
 # 2. Aquarelles : déplacées APRÈS le titre de chapitre/partie, pour qu'elles
 #    ouvrent le fichier de leur chapitre (= vrai saut de page sur tous les
@@ -140,5 +147,5 @@ shutil.move(tmp, src)
 print(f'post-traitement : couverture hors flux, page de titre épurée, {len(plates)} planches en pages dédiées')
 PYEOF
 
-rm -f main_epub_tmp.tex parts/book_body_epub_tmp.tex parts/interior_cover_epub_tmp.tex
+rm -f main_epub_tmp.tex parts/book_body_epub_tmp.tex parts/interior_cover_epub_tmp.tex structure_epub_tmp.tex
 echo "EPUB généré : $OUT"

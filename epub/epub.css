@@ -12,11 +12,12 @@ body {
   orphans: 2;
 }
 
-/* Paragraphes à la française */
+/* Paragraphes à la française. L'alignement n'est volontairement pas
+   imposé : sans césure fiable, le justifié creuse de grands blancs sur
+   mobile — on laisse le réglage du lecteur (et de l'utilisateur) décider. */
 p {
   margin: 0;
   text-indent: 1.2em;
-  text-align: justify;
   line-height: 1.5;
 }
 
