@@ -3,76 +3,62 @@ name: Build PDF and EPUB
 on:
   push:
     branches:
-      - main # assuming your default branch is 'main'
+      - main
+      - "claude/**"
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Build PDF
-        uses: xu-cheng/latex-action@v2
+        uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
 
-      - name: Add timestamp to PDF filename
-        run: mv main.pdf "ebook_entreprise_liberee_l_envers_du_decor-$(date +%Y%m%d%H%M%S).pdf"
+      - name: Rename PDF
+        run: mv main.pdf ebook_entreprise_liberee_l_envers_du_decor.pdf
 
-      - name: Upload PDF
-        uses: actions/upload-artifact@v2
-        with:
-          name: Behind_the_scenes_of_Liberated_Companies
-          path: "ebook_entreprise_liberee_l_envers_du_decor-*.pdf"
-          if-no-files-found: error
-          archive_format: none
+      - name: Install pandoc and imagemagick
+        run: sudo apt-get update && sudo apt-get install -y pandoc imagemagick
 
-      - name: Install pandoc
-        run: sudo apt-get install -y pandoc
-
+      # EPUB : couvertures TikZ exclues (illisibles en EPUB), images
+      # redimensionnées et converties en JPEG (le PDF, déjà construit, garde
+      # les PNG pleine résolution)
       - name: Convert LaTeX to EPUB
         run: |
-          pandoc main.tex --epub-cover-image=images/cover.png -o  ebook_entreprise_liberee_l_envers_du_decor.epub
+          sed '/parts\/cover.tex/d; /back_cover.tex/d' main.tex > main_epub.tex
+          mogrify -resize '1200x1200>' images/*.png
+          mogrify -format jpg -quality 85 images/*.png
+          sed -i 's/\.png}/.jpg}/g' chapters/*.tex parts/*.tex main_epub.tex
+          pandoc main_epub.tex --epub-cover-image=images/cover.jpg \
+            --metadata lang=fr-FR --toc --toc-depth=2 \
+            -o ebook_entreprise_liberee_l_envers_du_decor.epub
+          git checkout -- chapters parts
 
-      - name: Generate tag and release names
-        id: generate_names
-        run: |
-          echo "::set-output name=tag_name::${{ github.ref_name }}-$(date +%s)"
-          echo "::set-output name=release_name::Release ${{ github.ref_name }}-$(date +%s)"
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_PRIVATE_TOKEN_FOR_BEHIND_THE_SCENES_EBOOK }}
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
         with:
-          tag_name: ${{ steps.generate_names.outputs.tag_name }}
-          release_name: ${{ steps.generate_names.outputs.release_name }}
+          name: Behind_the_scenes_of_Liberated_Companies
+          path: |
+            ebook_entreprise_liberee_l_envers_du_decor.pdf
+            ebook_entreprise_liberee_l_envers_du_decor.epub
+          if-no-files-found: error
+
+      # Release only from main — work branches just build and upload artifacts
+      - name: Create Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}-${{ github.run_id }}
+          name: Release ${{ github.ref_name }}-${{ github.run_id }}
           draft: false
           prerelease: false
-      
-      - name: Upload EPUB Release Asset
-        id: upload-release-asset-epub
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_PRIVATE_TOKEN_FOR_BEHIND_THE_SCENES_EBOOK }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ebook_entreprise_liberee_l_envers_du_decor.epub
-          asset_name: ebook_entreprise_liberee_l_envers_du_decor.epub
-          asset_content_type: application/epub+zip
-
-      - name: Rename PDF
-        run: mv ebook_entreprise_liberee_l_envers_du_decor-*.pdf ebook_entreprise_liberee_l_envers_du_decor.pdf
-
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_PRIVATE_TOKEN_FOR_BEHIND_THE_SCENES_EBOOK }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./ebook_entreprise_liberee_l_envers_du_decor.pdf
-          asset_name: ebook_entreprise_liberee_l_envers_du_decor.pdf
-          asset_content_type: application/pdf
+          files: |
+            ebook_entreprise_liberee_l_envers_du_decor.pdf
+            ebook_entreprise_liberee_l_envers_du_decor.epub
