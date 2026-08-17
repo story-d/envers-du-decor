@@ -1,0 +1,89 @@
+/* ============================================================
+   Feuille de style EPUB — L'envers du décor des entreprises libérées
+   Sobre et compatible liseuses (Kindle, Kobo, Google Play Books,
+   Apple Books) : pas de couleurs imposées au texte (thèmes sombres),
+   composition « livre » : alinéas, pas de blanc inter-paragraphes.
+   ============================================================ */
+
+body {
+  margin: 0;
+  padding: 0;
+  widows: 2;
+  orphans: 2;
+}
+
+/* Paragraphes à la française */
+p {
+  margin: 0;
+  text-indent: 1.2em;
+  text-align: justify;
+  line-height: 1.5;
+}
+
+/* Pas d'alinéa après un titre ou une image */
+h1 + p, h2 + p, h3 + p, h4 + p,
+div.figure + p, figure + p, p.first {
+  text-indent: 0;
+}
+
+/* Titres */
+h1, h2, h3, h4 {
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: left;
+  page-break-after: avoid;
+  break-after: avoid;
+}
+h1 { font-size: 1.7em; margin: 1.4em 0 0.8em 0; }
+h2 { font-size: 1.3em; margin: 1.2em 0 0.5em 0; }
+h3 { font-size: 1.1em; margin: 1em 0 0.4em 0; }
+h4 { font-size: 1em; font-style: italic; margin: 0.8em 0 0.3em 0; }
+
+/* Lettrines (span produits par pandoc depuis \lettrine) */
+span.lettrine {
+  float: left;
+  font-size: 2.6em;
+  line-height: 0.9;
+  font-weight: bold;
+  margin-right: 0.06em;
+}
+span.smallcaps {
+  font-variant: small-caps;
+}
+
+/* Images et légendes */
+img {
+  max-width: 100%;
+  height: auto;
+}
+figure, div.figure {
+  margin: 1em 0;
+  text-align: center;
+  page-break-inside: avoid;
+}
+figcaption, p.caption {
+  font-size: 0.75em;
+  color: #777777;
+  text-align: right;
+  margin-top: 0.3em;
+}
+
+/* Citations en exergue */
+blockquote {
+  margin: 1em 1.5em;
+  font-style: italic;
+}
+blockquote p { text-indent: 0; }
+
+/* Notes de bas de page (rendues en fin de section par pandoc) */
+section.footnotes, div.footnotes {
+  font-size: 0.85em;
+  margin-top: 2em;
+}
+section.footnotes hr, div.footnotes hr {
+  width: 30%;
+  margin-left: 0;
+}
+
+/* Liens discrets */
+a { text-decoration: none; }
