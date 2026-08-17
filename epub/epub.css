@@ -100,6 +100,42 @@ body#cover {
   max-height: 100%;
 }
 
+/* Page de titre (générée par pandoc, épurée au post-traitement) */
+section.titlepage {
+  text-align: center;
+}
+h1.title {
+  margin-top: 25%;
+  font-size: 1.9em;
+  line-height: 1.25;
+  text-align: center;
+}
+p.author {
+  margin-top: 2.5em;
+  font-size: 1.15em;
+  text-indent: 0;
+  text-align: center;
+}
+p.publisher {
+  margin-top: 6em;
+  font-size: 0.9em;
+  font-variant: small-caps;
+  text-indent: 0;
+  text-align: center;
+}
+
+/* Planches : l'aquarelle seule sur sa page dédiée */
+section.plate {
+  text-align: center;
+}
+section.plate figure {
+  page-break-before: auto;
+  break-before: auto;
+  page-break-after: auto;
+  break-after: auto;
+  margin: 1em 0;
+}
+
 /* Citations en exergue */
 blockquote {
   margin: 1em 1.5em;
