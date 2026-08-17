@@ -1,0 +1,50 @@
+% Front matter
+\frontmatter
+
+% Cover (uniquement au format A5 ; les gabarits d'impression POD reçoivent
+% leur couverture séparément, avec dos calculé selon l'épaisseur)
+\ifdefstring{\bookformat}{a5}{%
+\pagenumbering{gobble}
+\input{./parts/cover.tex}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+}{\pagenumbering{gobble}}
+
+% Interior cover
+\input{./parts/interior_cover.tex}
+
+% Le front matter est folioté en chiffres romains à partir de l'édito
+\pagenumbering{roman}
+
+% Édito
+\input{./chapters/edito.tex}
+
+% Table des matières
+\input{./parts/table_of_contents.tex}
+
+% Page blanche
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% Corpus
+\input{./parts/corpus.tex}
+
+\newpage
+
+\listoffootnotes
+
+\newpage
+
+% Bibliographie consolidée
+\input{./parts/bibliography.tex}
+
+\newpage
+\thispagestyle{empty}
+\mbox{}
+
+% Back cover (format A5 uniquement)
+\ifdefstring{\bookformat}{a5}{\input{./parts/back_cover.tex}}{}
+

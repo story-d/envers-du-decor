@@ -5,8 +5,20 @@
 % et orphelines contrôlées.
 % ============================================================
 
-% Configuration des marges (A5)
-\usepackage[a5paper, top=20mm, bottom=22mm, inner=19mm, outer=16mm, footskip=11mm]{geometry}
+% Format du livre : « a5 » (défaut) ou « poche », défini par le fichier
+% maître (main.tex / main_poche.tex) avant l'\input de structure.tex
+\usepackage{etoolbox}
+\providecommand{\bookformat}{a5}
+
+% Configuration des marges selon le format
+\ifdefstring{\bookformat}{poche}{%
+  \usepackage[paperwidth=108mm, paperheight=175mm, top=15mm, bottom=17mm, inner=17mm, outer=12mm, footskip=9mm]{geometry}%
+  % Tailles de la page de titre intérieure (corps réduit pour le poche)
+  \newcommand{\titlepageBig}{26}\newcommand{\titlepageMid}{19}%
+}{%
+  \usepackage[a5paper, top=20mm, bottom=22mm, inner=19mm, outer=16mm, footskip=11mm]{geometry}%
+  \newcommand{\titlepageBig}{40}\newcommand{\titlepageMid}{30}%
+}
 
 % Table des matières et liens
 \usepackage{tocloft, hyperref}
@@ -40,7 +52,7 @@
 \captionsetup{justification=raggedleft, font={tiny, color=gray}, singlelinecheck=false}
 
 % Boucles, images et commandes supplémentaires
-\usepackage{pgffor, graphicx, etoolbox}
+\usepackage{pgffor, graphicx}
 
 % ------------------------------------------------------------
 % Composition du texte : conventions du livre imprimé
@@ -59,7 +71,7 @@
 \clubpenalty=10000
 \widowpenalty=10000
 \displaywidowpenalty=10000
-\emergencystretch=1em
+\ifdefstring{\bookformat}{poche}{\emergencystretch=2em}{\emergencystretch=1em}
 \raggedbottom % pas de justification verticale : les pages courtes (intros de
               % partie, fins de chapitre) restent calées en haut au lieu d'être étirées
 

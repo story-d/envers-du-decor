@@ -16,37 +16,39 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build PDF
+      - name: Build PDF (édition A5)
         uses: xu-cheng/latex-action@v3
         with:
           root_file: main.tex
 
-      - name: Rename PDF
-        run: mv main.pdf ebook_entreprise_liberee_l_envers_du_decor.pdf
+      - name: Build PDF (édition poche 108x175 mm)
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main_poche.tex
 
-      - name: Install pandoc and imagemagick
-        run: sudo apt-get update && sudo apt-get install -y pandoc imagemagick
-
-      # EPUB : couvertures TikZ exclues (illisibles en EPUB), images
-      # redimensionnées et converties en JPEG (le PDF, déjà construit, garde
-      # les PNG pleine résolution)
-      - name: Convert LaTeX to EPUB
+      - name: Rename PDFs
         run: |
-          sed '/parts\/cover.tex/d; /back_cover.tex/d' main.tex > main_epub.tex
-          mogrify -resize '1200x1200>' images/*.png
-          mogrify -format jpg -quality 85 images/*.png
-          sed -i 's/\.png}/.jpg}/g' chapters/*.tex parts/*.tex main_epub.tex
-          pandoc main_epub.tex --epub-cover-image=images/cover.jpg \
-            --metadata lang=fr-FR --toc --toc-depth=2 \
-            -o ebook_entreprise_liberee_l_envers_du_decor.epub
-          git checkout -- chapters parts
+          mv main.pdf ebook_entreprise_liberee_l_envers_du_decor_a5.pdf
+          mv main_poche.pdf ebook_entreprise_liberee_l_envers_du_decor_poche.pdf
+
+      - name: Install pandoc, imagemagick and epubcheck
+        run: sudo apt-get update && sudo apt-get install -y pandoc imagemagick epubcheck default-jre-headless
+
+      # EPUB « store » : métadonnées et CSS dans epub/, couvertures TikZ
+      # exclues, images JPEG allégées (le script modifie le checkout, jetable en CI)
+      - name: Build EPUB
+        run: bash scripts/build_epub.sh ebook_entreprise_liberee_l_envers_du_decor.epub
+
+      - name: Validate EPUB (epubcheck)
+        run: java -jar /usr/share/java/epubcheck.jar ebook_entreprise_liberee_l_envers_du_decor.epub
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Behind_the_scenes_of_Liberated_Companies
           path: |
-            ebook_entreprise_liberee_l_envers_du_decor.pdf
+            ebook_entreprise_liberee_l_envers_du_decor_a5.pdf
+            ebook_entreprise_liberee_l_envers_du_decor_poche.pdf
             ebook_entreprise_liberee_l_envers_du_decor.epub
           if-no-files-found: error
 
@@ -60,5 +62,6 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ebook_entreprise_liberee_l_envers_du_decor.pdf
+            ebook_entreprise_liberee_l_envers_du_decor_a5.pdf
+            ebook_entreprise_liberee_l_envers_du_decor_poche.pdf
             ebook_entreprise_liberee_l_envers_du_decor.epub

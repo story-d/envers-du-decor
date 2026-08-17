@@ -1,10 +1,12 @@
 % ============================================================
-% Édition A5 (ebook PDF + impression) — voir main_poche.tex
-% pour l'édition poche. Le contenu commun vit dans
-% parts/book_body.tex ; la maquette dans structure.tex.
+% Édition poche — gabarit d'impression à la demande.
+% Format 108 x 175 mm (4,25 x 6,87 po), un des formats standard
+% d'Amazon KDP, très proche du poche français (110 x 178).
+% Sans couvertures : les plateformes POD reçoivent la couverture
+% dans un fichier séparé (avec dos calculé selon la pagination).
 % ============================================================
-\documentclass[twoside, a5paper, 11pt]{book}
-\newcommand{\bookformat}{a5}
+\documentclass[twoside, 10pt]{book}
+\newcommand{\bookformat}{poche}
 \input{structure.tex}
 
 % Commandes personnalisées

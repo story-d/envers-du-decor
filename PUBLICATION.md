@@ -29,17 +29,32 @@ Le manuscrit a eu une passe complète d'orthographe/typographie, mais aucun text
 ## 5. Production (état actuel)
 
 - **PDF** : construit par la CI (`latex-action`, A5). À vérifier sur épreuve avant impression : coupures de pages, rendu de la « Liste des sources » (98 notes) et de la bibliographie.
-- **EPUB** : construit par la CI via pandoc — pipeline audité et corrigé (langue `fr-FR`, couvertures TikZ exclues, images JPEG ≤1200 px : **3,5 Mo** au lieu de 32). À relire une fois sur liseuse réelle (Kindle/Kobo) avant diffusion.
+- **EPUB** : construit par `scripts/build_epub.sh` (CI et local) — métadonnées complètes (`epub/metadata.yaml` : description, éditeur, sujets/BISAC), feuille de style de lecture (`epub/epub.css` : alinéas, lettrines, compatible thèmes sombres), découpage par chapitre, images JPEG allégées (3,6 Mo), **validé epubcheck 0 erreur / 0 warning (EPUB 3.2)**. À relire une fois sur liseuse réelle (Kindle Previewer + Kobo) avant diffusion.
+- **Édition poche** : `main_poche.tex` (108 × 175 mm, corps 10 pt, 168 pages, sans couvertures) — gabarit prêt pour KDP Print.
 - `content.opf` / fichiers `epub*` à la racine : vestiges d'un EPUB construit à la main, **non utilisés** par la chaîne actuelle (pandoc génère ses propres métadonnées). Peuvent être supprimés ou conservés comme référence.
 
-## 6. Diffusion 🔑 (à décider)
+## 6. Diffusion 🔑 — mode d'emploi par plateforme
 
-| Canal | Effort | Remarques |
+Les livrables sont produits par la CI à chaque push : `..._a5.pdf` (édition A5), `..._poche.pdf` (gabarit d'impression 108 × 175 mm) et `...epub` (validé epubcheck, 0 erreur, EPUB 3.2).
+
+### Ebook
+
+| Plateforme | Fichier | Spécificités |
 |---|---|---|
-| Amazon KDP | Faible | EPUB + couverture ; impression à la demande possible (le PDF A5 convient avec marges à ajuster) |
-| Kobo Writing Life / Google Play Books | Faible | EPUB direct |
-| Leanpub / Gumroad | Faible | Cohérent avec un lectorat tech ; PDF+EPUB |
-| Librinova / BoD | Moyen | Diffusion librairies FR, ISBN inclus |
+| **Amazon KDP** (Kindle) | EPUB | Accepte l'EPUB directement. Couverture marketing à uploader séparément : ratio 1,6:1, idéal 1600 × 2560 px (`dist/cover_kindle_1600x2560.jpg` — ⚠️ agrandie depuis un original 972 px : régénérer l'aquarelle en haute résolution avant mise en vente). Vérifier le rendu avec Kindle Previewer. ISBN non requis pour le Kindle (ASIN attribué). |
+| **Kobo Writing Life** (→ Fnac) | EPUB | La Fnac est servie via Kobo. EPUB + couverture JPG ≥ 1400 px de large. ISBN recommandé. |
+| **Google Play Books** | EPUB | Partner Center ; EPUB + couverture. ISBN recommandé (sinon identifiant Google). |
+| **Apple Books** | EPUB | Via iTunes Connect ou un agrégateur. ISBN requis. |
+| Agrégateur (Bookwire, Vivlio, Immatériel…) | EPUB | Une seule livraison pour tous les stores + bibliothèques ; commission en échange. Option si multiplier les back-offices lasse. |
+
+### Impression à la demande (livre de poche)
+
+| Plateforme | Fichier | Spécificités |
+|---|---|---|
+| **Amazon KDP Print** | `..._poche.pdf` | Format 108 × 175 mm = trim standard KDP 4,25 × 6,87 po. Intérieur SANS couverture (déjà le cas du gabarit poche). Couverture à part : gabarit KDP calculé selon la pagination (168 p. ≈ dos de 10 mm en crème 55 lb) — utiliser le « Cover Calculator » KDP. ISBN : gratuit via KDP ou le vôtre (AFNIL). |
+| BoD / Lulu | `..._poche.pdf` | Mêmes principes ; BoD diffuse en librairies FR. |
+
+Marges du gabarit poche : intérieure 17 mm (> 9,6 mm exigés par KDP jusqu'à 300 p.), extérieures 12 mm (> 6,3 mm) — conformes, sans fond perdu nécessaire (aucun élément ne touche les bords).
 
 ## 7. Bon à tirer — checklist finale
 
