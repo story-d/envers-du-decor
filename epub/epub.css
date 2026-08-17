@@ -51,7 +51,9 @@ span.smallcaps {
   font-variant: small-caps;
 }
 
-/* Images et légendes */
+/* Images et légendes : chaque illustration occupe sa propre page
+   (comme dans l'édition imprimée) et est centrée horizontalement.
+   NB : le centrage vertical n'est pas fiable en EPUB reflowable. */
 img {
   max-width: 100%;
   height: auto;
@@ -59,13 +61,40 @@ img {
 figure, div.figure {
   margin: 1em 0;
   text-align: center;
+  page-break-before: always;
+  break-before: page;
+  page-break-after: always;
+  break-after: page;
   page-break-inside: avoid;
+  break-inside: avoid;
+}
+figure img, div.figure img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
 }
 figcaption, p.caption {
   font-size: 0.75em;
   color: #777777;
   text-align: right;
   margin-top: 0.3em;
+}
+
+/* Couverture : centrée dans la page du lecteur */
+body#cover {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+#cover-image {
+  text-align: center;
+}
+#cover-image svg,
+#cover-image img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* Citations en exergue */
