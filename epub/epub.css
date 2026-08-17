@@ -67,26 +67,11 @@ figure, div.figure {
   break-after: page;
   page-break-inside: avoid;
   break-inside: avoid;
-  /* Centrage vertical sur la page (moteurs modernes : Play Books, Kobo,
-     Apple, Kindle récent) ; repli haut de page sur les moteurs anciens */
-  min-height: 92vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  align-items: center;
 }
 figure img, div.figure img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
-  max-height: 85vh;
 }
 figcaption, p.caption {
   font-size: 0.75em;
@@ -95,8 +80,10 @@ figcaption, p.caption {
   margin-top: 0.3em;
 }
 
-/* Couverture : centrée horizontalement ET verticalement dans la page
-   (flex + vh sur moteurs modernes ; repli haut de page sinon) */
+/* Couverture : centrée horizontalement, pleine largeur de page.
+   (Pas de centrage vertical : flexbox/vh cassent l'ouverture du fichier
+   sur certaines liseuses anciennes, et les moteurs propriétaires comme
+   ReadEra ignorent de toute façon le CSS de l'éditeur.) */
 body#cover {
   margin: 0;
   padding: 0;
@@ -104,23 +91,13 @@ body#cover {
 }
 #cover-image {
   text-align: center;
-  min-height: 96vh;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  align-items: center;
 }
 #cover-image svg,
 #cover-image img {
   display: block;
   margin: 0 auto;
   max-width: 100%;
-  max-height: 96vh;
+  max-height: 100%;
 }
 
 /* Citations en exergue */
