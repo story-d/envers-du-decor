@@ -1,5 +1,7 @@
 # Questions à l'auteur — matière pour les anecdotes
 
+> **État (août 2026)** : les réponses aux 5 questions prioritaires (données en conversation) sont **intégrées au manuscrit** — scène fondatrice dans l'édito (société anonymisée), erreur de pédagogie (ch. 2.1), processus salaires + salaire du fondateur (ch. 4.2), témoignages de la liquidation (ch. 4.1), formation minimale (ch. 5.2), conclusion personnelle avec la liquidation assumée. **Restent ouvertes** (optionnelles, pour enrichir) : Q9–Q10 (recrutement), Q15 (scène client/fournisseur), Q16–Q17 (détails formation), Q11 (interviews complètes de 30 min). Les emplacements correspondants ont été retirés du manuscrit — toute réponse tardive sera réintégrée sur demande.
+
 *Chaque question correspond à un emplacement `% [KEVIN : …]` dans les sources LaTeX. Répondez en vrac, directement sous chaque question (notes, fragments, style télégraphique — peu importe : je réécris ensuite dans la voix du livre). Aucune obligation de tout remplir : une réponse vide = l'emplacement sera supprimé proprement.*
 
 *Règle du jeu : uniquement du vécu réel. Les personnes et entreprises citées seront anonymisées à votre demande — précisez « à anonymiser » quand c'est le cas.*
