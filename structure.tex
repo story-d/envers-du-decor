@@ -1,79 +1,145 @@
-% Configuration des marges
-\usepackage[margin=0.8in]{geometry} % Définit les marges du document
+% ============================================================
+% Maquette du livre — structure.tex
+% Corps en EB Garamond, composition « livre » à la française :
+% alinéas, pas de saut de paragraphe, titres composés, veuves
+% et orphelines contrôlées.
+% ============================================================
 
-% Personnalisation des titres de section et table des matières
-\usepackage{sectsty, tocloft, hyperref} % Importe les packages nécessaires pour personnaliser les titres et la table des matières
+% Configuration des marges (A5)
+\usepackage[a5paper, top=20mm, bottom=22mm, inner=19mm, outer=16mm, footskip=11mm]{geometry}
+
+% Table des matières et liens
+\usepackage{tocloft, hyperref}
 \hypersetup{
-    pdfauthor={Kevin Delfour}, % Définit l'auteur du PDF
-    pdftitle={L'envers du décor des entreprises libérées}, % Définit le titre du PDF
-    pdfkeywords={entreprise libérée, holacratie, management, autonomie, organisation}, % Définit les mots-clés du PDF
-    hidelinks % Cache les liens dans le PDF
+    pdfauthor={Kevin Delfour},
+    pdftitle={L'envers du décor des entreprises libérées},
+    pdfkeywords={entreprise libérée, holacratie, management, autonomie, organisation},
+    hidelinks
 }
+\usepackage{xurl}    % autorise la césure des URL n'importe où
+\urlstyle{same}      % URL composées dans la police du texte
 
 % Cadres, tailles de police et en-têtes/pieds de page personnalisés
-\usepackage{framed, anyfontsize, fancyhdr} % Importe les packages nécessaires pour personnaliser les cadres, les tailles de police et les en-têtes/pieds de page
+\usepackage{framed, anyfontsize, fancyhdr}
 
-% Police Garamond et paramètres de langue
-\usepackage{ebgaramond, float} % Importe la police Garamond et le package float pour la gestion des flottants
-\usepackage[french]{babel} % Définit le français comme langue principale
-\usepackage[T1]{fontenc} % Utilise la codification de caractères T1
+% Police EB Garamond (corps du texte) et paramètres de langue
+\usepackage{ebgaramond, float}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
 
 % Couleurs personnalisées et graphiques TikZ
-\usepackage[dvipsnames]{xcolor} % Importe le package xcolor avec les noms de couleurs dvips
-\usepackage{tikz, microtype, GS1, qrcode} % Importe les packages nécessaires pour les graphiques TikZ, la microtypographie, les codes-barres GS1 et les QR codes
-\usetikzlibrary{calc} % Utilise la bibliothèque calc de TikZ pour les calculs de coordonnées
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tikz, microtype, GS1, qrcode}
+\usetikzlibrary{calc}
 
-\usepackage[labelformat=empty]{caption} % Importe le package caption avec un format de label vide
-\captionsetup{justification=raggedleft, font={tiny, color=gray}, singlelinecheck=false} % Configure les légendes des figures
+\usepackage[labelformat=empty]{caption}
+\captionsetup{justification=raggedleft, font={tiny, color=gray}, singlelinecheck=false}
 
-% Contenu : texte aléatoire, boucles, images et commandes supplémentaires
-\usepackage{lipsum, pgffor, graphicx, etoolbox} % Importe les packages nécessaires pour le contenu : texte aléatoire, boucles, images et commandes supplémentaires
+% Boucles, images et commandes supplémentaires
+\usepackage{pgffor, graphicx, etoolbox}
 
-% Configuration de la mise en page
-\renewcommand{\familydefault}{\sfdefault} % Utilise la police sans serif par défaut
-\setlength{\parskip}{\baselineskip} % Définit l'espacement entre les paragraphes
-\setlength{\parindent}{0pt} % Supprime l'indentation des paragraphes
+% ------------------------------------------------------------
+% Composition du texte : conventions du livre imprimé
+% ------------------------------------------------------------
+% Corps en Garamond (la police par défaut du document est la
+% romane chargée ci-dessus) ; léger interlignage pour compenser
+% la petite hauteur d'x de la Garamond.
+\linespread{1.06}
+
+% Paragraphes à la française : alinéa, pas de blanc entre les
+% paragraphes (le blanc est réservé aux changements de section).
+\setlength{\parindent}{1.2em}
+\setlength{\parskip}{0pt plus 1pt}
+
+% Veuves, orphelines et débordements
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+\emergencystretch=1em
+
+% ------------------------------------------------------------
+% Titres (parties, chapitres, sections)
+% ------------------------------------------------------------
+\usepackage{titlesec}
+
+% Chapitre : « CHAPITRE N » en petites capitales espacées et
+% grisées, puis le titre en grand corps gras.
+\titleformat{\chapter}[display]
+  {\normalfont\raggedright}
+  {\color{gray}\small\textls[120]{\MakeUppercase{\chaptertitlename~\thechapter}}}
+  {0.6em}
+  {\huge\bfseries}
+\titlespacing*{\chapter}{0pt}{0pt}{2\baselineskip}
+
+% Partie : numéro discret, titre en très grand corps
+\titleformat{\part}[display]
+  {\centering\normalfont}
+  {\color{gray}\large\textls[120]{\MakeUppercase{\partname~\thepart}}}
+  {1em}
+  {\Huge\bfseries}
+
+\titleformat{\section}
+  {\normalfont\Large\bfseries}{\thesection}{0.6em}{}
+\titlespacing*{\section}{0pt}{1.6\baselineskip}{0.6\baselineskip}
+
+\titleformat{\subsection}
+  {\normalfont\large\bfseries}{\thesubsection}{0.6em}{}
+\titlespacing*{\subsection}{0pt}{1.2\baselineskip}{0.4\baselineskip}
+
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\itshape}{\thesubsubsection}{0.6em}{}
 
 % Configuration de la table des matières
-\setcounter{tocdepth}{2} % Définit la profondeur de la table des matières
-\renewcommand{\cftpartfont}{\normalfont\bfseries\Large} % Configure la police des parties dans la table des matières
-\renewcommand{\cftchapfont}{\normalfont\bfseries} % Configure la police des chapitres dans la table des matières
-\renewcommand{\cftsecfont}{\normalfont} % Configure la police des sections dans la table des matières
-\renewcommand{\cftsubsecfont}{\normalfont} % Configure la police des sous-sections dans la table des matières
-\renewcommand{\cftsubsubsecfont}{\normalfont\small} % Configure la police des sous-sous-sections dans la table des matières
+\setcounter{tocdepth}{2}
+\renewcommand{\cftpartfont}{\normalfont\bfseries\Large}
+\renewcommand{\cftchapfont}{\normalfont\bfseries}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsubsecfont}{\normalfont}
+\renewcommand{\cftsubsubsecfont}{\normalfont\small}
 
-% Configuration des en-têtes et pieds de page personnalisés
-\pagestyle{fancy} % Utilise le style de page fancy
-\fancyhead{} % Supprime l'en-tête par défaut
-\fancyhead[LO, L]{ \color{gray}\scriptsize\leftmark} % Configure l'en-tête gauche
-\fancyfoot{} % Supprime le pied de page par défaut
-\fancyfoot[R]{\scriptsize\thepage} % Configure le pied de page droit
-\renewcommand{\headrulewidth}{0pt} % Supprime la ligne sous l'en-tête
+% En-têtes et pieds de page
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LO, L]{\color{gray}\scriptsize\scshape\leftmark}
+\fancyfoot{}
+\fancyfoot[R]{\scriptsize\thepage}
+\renewcommand{\headrulewidth}{0pt}
 
-\newcommand{\listfootnotesname}{Liste des sources}% 'List of Footnotes' title
-\newlistof[chapter]{footnotes}{fnt}{\listfootnotesname}% New 'List of...' for footnotes
+% ------------------------------------------------------------
+% Liste des sources (notes de bas de page collectées)
+% ------------------------------------------------------------
+\newcommand{\listfootnotesname}{Liste des sources}
+\newlistof[chapter]{footnotes}{fnt}{\listfootnotesname}
+\setlength{\cftfootnotesnumwidth}{3.4em} % place pour « IV.12 »
+\setlength{\cftfootnotesindent}{0pt}
+\renewcommand{\cftfootnotesfont}{\small}
+\renewcommand{\cftfootnotespagefont}{\small}
 
 \newcommand{\insertImage}[2]{
     \markboth{}{} % Supprime les marques de tête
     \begin{figure}[H]
-        \center % Centre l'image
-        \includegraphics[keepaspectratio, width=\textwidth, height=\textheight]{images/#1} % Insère l'image
-        \captionsetup{justification=raggedright, singlelinecheck=false} % Aligne la légende sur la gauche
-        \caption{#2} % Ajoute une légende à l'image
+        \center
+        % 0.92\textheight : laisse la place de la légende sous l'image
+        \includegraphics[keepaspectratio, width=\textwidth, height=0.92\textheight]{images/#1}
+        \captionsetup{justification=raggedright, singlelinecheck=false}
+        \caption{#2}
     \end{figure}
-    \newpage % Crée une nouvelle page après l'image
+    \newpage
 }
 
 \makeatletter
 \renewcommand{\thefigure}{\@arabic\c@figure}
 \makeatother
 
-
 \let\oldfootnote\footnote % Save the old \footnote{...} command
-\renewcommand\footnote[1]{
+\renewcommand\footnote[1]{%
     \oldfootnote{#1}% Make a regular footnote with added margin.
-    \addcontentsline{fnt}{footnotes}{\protect
-        \numberline{\thepart.\thefootnotes}\hspace{1,8em}#1}% Add the 'List of...' entry with a margin between the number and the note, and include the part number in the numbering.
+    \refstepcounter{footnotes}% Numérotation séquentielle des entrées de la liste
+    \ifnum\value{part}>0
+        \addcontentsline{fnt}{footnotes}{\protect\numberline{\thepart.\thefootnotes}#1}%
+    \else % Avant la première partie (introduction) : pas de préfixe de partie
+        \addcontentsline{fnt}{footnotes}{\protect\numberline{\arabic{footnotes}}#1}%
+    \fi
 }
 
 \makeatletter
