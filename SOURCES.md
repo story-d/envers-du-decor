@@ -1,5 +1,13 @@
 # Traçabilité des sources
 
+> **Journal — enrichissement d'expertise (août 2026, 2e passe).** Nouveaux chapitres et références ajoutés, toutes vérifiées par recherche web :
+> - Bernstein, E., Bunch, J., Canner, N., & Lee, M. (2016). Beyond the Holacracy Hype. *Harvard Business Review*, 94(7-8), 38-49 — vérifiée (hbr.org). Soutient les chiffres Zappos (« The Offer » 2015 : ~14 % de départs immédiats, ~18 % dans l'année).
+> - Doyle, A. (2016). Management and Organization at Medium. *The Medium Blog*, mars 2016 — vérifiée (blog.medium.com).
+> - Gray, B. H., Sarnak, D. O., & Burgers, J. S. (2015). Home Care by Self-Governing Nursing Teams: The Netherlands' Buurtzorg Model. *The Commonwealth Fund* — vérifiée ; soutient le chiffre EY (≈40 % des heures autorisées vs ≈70 % en moyenne).
+> - Gascoigne, J. (2013). Introducing Open Salaries at Buffer. *Buffer* — vérifiée (buffer.com).
+> - Semler, R. (1993). *Maverick*. Warner Books — ouvrage réel.
+> - Repositionnement biographique : les mentions « holacratie » concernant la société de l'auteur ont été remplacées par sa trajectoire réelle (libération par expérimentations successives, base Laloux / organisations opales ; mécanismes sociocratiques — élection sans candidat, rôles tournants — vécus sans être nommés).
+
 > **Journal — réécriture phase 2 (août 2026).** Le corpus entier a été réécrit ; à cette occasion, les décisions ci-dessous ont été appliquées :
 > - **Supprimées** (introuvables/fabriquées) : Peshkin 2012 ; Green & Hayward 2018 ; Rodriguez B. 2014 ; Rodriguez I. 2017 ; Zerah 2014 ; Isaac H. 2015 ; Dubois 2002 ; « étude Paris-Dauphine 2017 » ; « ESCP 2018 » ; Bouvard & Rosier 2021 ; Giraud 2020 / « Institut de l'Entreprise Libérée » ; Gobillot 2019 ; « Getz 2013 leader libérateur » ; affirmations Air France et EM Lyon ; citations verbatim inventées (témoignages anonymes, citation Dupuy, citation Getz).
 > - **Remplacées/corrigées** : GitHub → Foss & Klein, MIT SMR 56(1), 2014 ; Chrono Flex → Gérard, *Le patron qui ne voulait plus être chef*, Flammarion, 2017 (titre/année corrigés) ; « Le travail en miettes » (Dujarier) → supprimé (titre de Friedmann 1956) ; Gore → Hamel, *The Future of Management*, 2007 ; Harley-Davidson → Teerlink & Ozley, *More Than a Motorcycle*, HBS Press, 2000 ; Goulston → 2009 ; Cappelli & Tavis → « The Performance Management Revolution », HBR 94(10), 2016 ; conduite du changement → Kotter, *Leading Change*, 1996 ; Dupuy → *La faillite de la pensée managériale (Lost in management 2)*, Seuil, 2015, en paraphrase ; éditions Getz/Carney harmonisées sur Crown Business 2009 (*Freedom, Inc.*) et Fayard 2017 (*L'entreprise libérée*).
