@@ -1,12 +1,12 @@
 # L'envers du décor des entreprises libérées
 
-[![Build PDF and EPUB](https://github.com/story-d/Ebook_Behind_the_scenes_of_Liberated_Companies/actions/workflows/build_pdf.yml/badge.svg?branch=main)](https://github.com/story-d/Ebook_Behind_the_scenes_of_Liberated_Companies/actions/workflows/build_pdf.yml)
+[![Build PDF and EPUB](https://github.com/story-d/envers-du-decor/actions/workflows/build_pdf.yml/badge.svg?branch=main)](https://github.com/story-d/envers-du-decor/actions/workflows/build_pdf.yml)
 
 **Un essai de Kevin Delfour** — écrit par un praticien qui a vécu le modèle des deux côtés : salarié d'une entreprise libérée, puis fondateur et dirigeant d'une société construite sur ces principes. Ce livre explore sans fard l'envers du décor : les défis quotidiens, les échecs documentés, les critiques sérieuses et les conditions réelles de réussite de la libération d'entreprise.
 
 ## Télécharger le livre
 
-Chaque push sur `main` produit une [release](https://github.com/story-d/Ebook_Behind_the_scenes_of_Liberated_Companies/releases) contenant les trois livrables :
+Chaque push sur `main` produit une [release](https://github.com/story-d/envers-du-decor/releases) contenant les trois livrables :
 
 | Fichier | Format | Usage |
 |---|---|---|
@@ -49,7 +49,7 @@ La CI ([`build_pdf.yml`](.github/workflows/build_pdf.yml)) fait exactement cela 
 
 ## Travaux restants avant publication
 
-Le reste-à-faire (couverture haute définition, ISBN, relectures, dépôt légal…) est suivi dans les [issues](https://github.com/story-d/Ebook_Behind_the_scenes_of_Liberated_Companies/issues) du dépôt.
+Le reste-à-faire (couverture haute définition, ISBN, relectures, dépôt légal…) est suivi dans les [issues](https://github.com/story-d/envers-du-decor/issues) du dépôt.
 
 ## Auteur et contact
 
