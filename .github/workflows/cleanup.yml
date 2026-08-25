@@ -1,0 +1,128 @@
+# ============================================================
+# Ménage hebdomadaire du dépôt : artefacts de build, journaux
+# d'exécution et releases automatiques.
+#
+# Déclenchement manuel : l'entrée « dry_run » est vraie par défaut,
+# le workflow se contente alors de lister ce qu'il supprimerait.
+# Déclenchement hebdomadaire : la purge est réelle.
+# ============================================================
+name: Cleanup
+
+on:
+  schedule:
+    - cron: "0 4 * * 1" # tous les lundis à 04h00 UTC
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Simulation — lister sans supprimer"
+        type: boolean
+        default: true
+
+concurrency:
+  group: cleanup
+  cancel-in-progress: false
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write # supprimer artefacts et journaux d'exécution
+      contents: write # supprimer releases et tags
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      REPO: ${{ github.repository }}
+      DRY_RUN: ${{ github.event.inputs.dry_run || 'false' }}
+      ARTIFACT_MAX_AGE_DAYS: 14
+      RUN_MAX_AGE_DAYS: 30
+      RUN_KEEP_MIN: 20
+      RELEASE_KEEP: 3
+      # Les releases antérieures à cette date sont des versions publiées,
+      # pas des artefacts de CI : elles ne sont jamais purgées.
+      RELEASE_PROTECT_BEFORE: "2026-01-01"
+    steps:
+      - name: Mode
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "::notice::SIMULATION — rien ne sera supprimé"
+          else
+            echo "::notice::PURGE RÉELLE"
+          fi
+
+      # --- Artefacts de build -------------------------------------
+      - name: Purge des artefacts
+        run: |
+          set -euo pipefail
+          CUTOFF=$(date -u -d "$ARTIFACT_MAX_AGE_DAYS days ago" +%Y-%m-%dT%H:%M:%SZ)
+          echo "Artefacts créés avant $CUTOFF"
+          gh api "repos/$REPO/actions/artifacts" --paginate \
+            --jq ".artifacts[] | select(.created_at < \"$CUTOFF\") | [.id, .name, .created_at] | @tsv" \
+            > /tmp/artifacts.tsv || true
+          COUNT=$(wc -l < /tmp/artifacts.tsv)
+          echo "$COUNT artefact(s) concerné(s)"
+          while IFS=$'\t' read -r id name created; do
+            [ -z "${id:-}" ] && continue
+            echo "  - $name ($created)"
+            if [ "$DRY_RUN" != "true" ]; then
+              gh api -X DELETE "repos/$REPO/actions/artifacts/$id" --silent || echo "    échec, ignoré"
+            fi
+          done < /tmp/artifacts.tsv
+
+      # --- Journaux d'exécution -----------------------------------
+      - name: Purge des journaux d'exécution
+        run: |
+          set -euo pipefail
+          CUTOFF=$(date -u -d "$RUN_MAX_AGE_DAYS days ago" +%Y-%m-%dT%H:%M:%SZ)
+          echo "Exécutions antérieures à $CUTOFF, en gardant toujours les $RUN_KEEP_MIN dernières"
+          gh api "repos/$REPO/actions/runs" --paginate \
+            --jq '.workflow_runs[] | [.id, .created_at, .name] | @tsv' \
+            > /tmp/runs_all.tsv || true
+          # L'API rend les exécutions de la plus récente à la plus ancienne :
+          # on épargne les N premières, puis on filtre le reste par date.
+          tail -n +$((RUN_KEEP_MIN + 1)) /tmp/runs_all.tsv \
+            | awk -F'\t' -v c="$CUTOFF" '$2 < c' > /tmp/runs.tsv || true
+          echo "$(wc -l < /tmp/runs.tsv) exécution(s) concernée(s) sur $(wc -l < /tmp/runs_all.tsv)"
+          while IFS=$'\t' read -r id created name; do
+            [ -z "${id:-}" ] && continue
+            echo "  - $name #$id ($created)"
+            if [ "$DRY_RUN" != "true" ]; then
+              gh api -X DELETE "repos/$REPO/actions/runs/$id" --silent || echo "    échec, ignoré"
+            fi
+          done < /tmp/runs.tsv
+
+      # --- Releases automatiques ----------------------------------
+      - name: Purge des releases automatiques
+        run: |
+          set -euo pipefail
+          echo "Conservation des $RELEASE_KEEP dernières releases « main-<run_id> »"
+          echo "Épargnées : les releases antérieures à $RELEASE_PROTECT_BEFORE et tout tag hors motif"
+          gh api "repos/$REPO/releases" --paginate \
+            --jq '.[] | [.id, .tag_name, .created_at] | @tsv' > /tmp/rel_all.tsv || true
+          # Ne sont candidates que les releases de CI, postérieures à la
+          # date de protection. Tout le reste (versions posées à la main,
+          # premières éditions) est laissé intact.
+          awk -F'\t' -v p="$RELEASE_PROTECT_BEFORE" \
+            '$2 ~ /^main-[0-9]+$/ && $3 >= p' /tmp/rel_all.tsv > /tmp/rel_auto.tsv || true
+          tail -n +$((RELEASE_KEEP + 1)) /tmp/rel_auto.tsv > /tmp/rel.tsv || true
+          echo "$(wc -l < /tmp/rel_all.tsv) release(s) au total, $(wc -l < /tmp/rel_auto.tsv) automatique(s), $(wc -l < /tmp/rel.tsv) à purger"
+          while IFS=$'\t' read -r id tag created; do
+            [ -z "${id:-}" ] && continue
+            echo "  - $tag ($created)"
+            if [ "$DRY_RUN" != "true" ]; then
+              gh api -X DELETE "repos/$REPO/releases/$id" --silent || echo "    échec release, ignoré"
+              gh api -X DELETE "repos/$REPO/git/refs/tags/$tag" --silent || echo "    échec tag, ignoré"
+            fi
+          done < /tmp/rel.tsv
+
+      - name: Récapitulatif
+        run: |
+          {
+            echo "### Ménage du dépôt"
+            echo ""
+            if [ "$DRY_RUN" = "true" ]; then echo "**Simulation** — rien n'a été supprimé."; else echo "**Purge réelle.**"; fi
+            echo ""
+            echo "| Cible | Règle | Concernés |"
+            echo "|---|---|---|"
+            echo "| Artefacts | plus de $ARTIFACT_MAX_AGE_DAYS jours | $(wc -l < /tmp/artifacts.tsv) |"
+            echo "| Journaux | plus de $RUN_MAX_AGE_DAYS jours, minimum $RUN_KEEP_MIN gardés | $(wc -l < /tmp/runs.tsv) |"
+            echo "| Releases | au-delà des $RELEASE_KEEP dernières, hors versions publiées | $(wc -l < /tmp/rel.tsv) |"
+          } >> "$GITHUB_STEP_SUMMARY"
