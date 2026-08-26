@@ -1,3 +1,11 @@
+# ============================================================
+# Fabrique du livre : deux PDF et un EPUB, à chaque push.
+#
+# Ce fichier est le MÊME dans les trois dépôts de l'organisation
+# (organisations-toxiques, envers-du-decor, un-produit-sans-dev) :
+# seule la valeur de SLUG ci-dessous en distingue les copies.
+# Une correction ici se reporte telle quelle dans les deux autres.
+# ============================================================
 name: Build PDF and EPUB
 
 on:
@@ -6,6 +14,15 @@ on:
       - main
       - "claude/**"
   workflow_dispatch:
+
+# Un seul build par branche : un push qui en suit un autre de près annule
+# le précédent, au lieu de doubler minutes et stockage pour rien.
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SLUG: envers_du_decor
 
 jobs:
   build:
@@ -26,33 +43,58 @@ jobs:
         with:
           root_file: main_poche.tex
 
-      - name: Rename PDFs
-        run: |
-          mv main.pdf ebook_entreprise_liberee_l_envers_du_decor_a5.pdf
-          mv main_poche.pdf ebook_entreprise_liberee_l_envers_du_decor_poche.pdf
+      # ------------------------------------------------------------
+      # Chaîne EPUB : réservée à main et au déclenchement manuel. Sur
+      # les branches de travail, l'installation de pandoc et d'epubcheck
+      # coûtait plus de temps que tout le reste du build réuni.
+      # Pour vérifier l'EPUB depuis une branche : onglet Actions →
+      # « Build PDF and EPUB » → « Run workflow ».
+      # ------------------------------------------------------------
+      - name: Install pandoc, imagemagick, poppler and epubcheck
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        run: sudo apt-get update && sudo apt-get install -y pandoc imagemagick poppler-utils epubcheck default-jre-headless
 
-      - name: Install pandoc, imagemagick and epubcheck
-        run: sudo apt-get update && sudo apt-get install -y pandoc imagemagick epubcheck default-jre-headless
-
-      # EPUB « store » : métadonnées et CSS dans epub/, couvertures TikZ
-      # exclues, images JPEG allégées (le script modifie le checkout, jetable en CI)
       - name: Build EPUB
-        run: bash scripts/build_epub.sh ebook_entreprise_liberee_l_envers_du_decor.epub
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        run: bash scripts/build_epub.sh "$SLUG.epub"
 
       - name: Validate EPUB (epubcheck)
-        run: java -jar /usr/share/java/epubcheck.jar ebook_entreprise_liberee_l_envers_du_decor.epub
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        run: java -jar /usr/share/java/epubcheck.jar "$SLUG.epub"
 
-      - name: Upload build artifacts
+      - name: Rename deliverables
+        run: |
+          mv main.pdf "${SLUG}_a5.pdf"
+          mv main_poche.pdf "${SLUG}_poche.pdf"
+
+      # Branches de travail : les deux PDF seulement.
+      - name: Upload build artifacts (PDF only)
+        if: github.ref != 'refs/heads/main' && github.event_name != 'workflow_dispatch'
         uses: actions/upload-artifact@v4
         with:
-          name: Behind_the_scenes_of_Liberated_Companies
+          name: ${{ env.SLUG }}
           path: |
-            ebook_entreprise_liberee_l_envers_du_decor_a5.pdf
-            ebook_entreprise_liberee_l_envers_du_decor_poche.pdf
-            ebook_entreprise_liberee_l_envers_du_decor.epub
+            ${{ env.SLUG }}_a5.pdf
+            ${{ env.SLUG }}_poche.pdf
           if-no-files-found: error
+          retention-days: 14
 
-      # Release only from main — work branches just build and upload artifacts
+      # main et déclenchement manuel : tous les livrables.
+      - name: Upload build artifacts
+        if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.SLUG }}
+          path: |
+            ${{ env.SLUG }}_a5.pdf
+            ${{ env.SLUG }}_poche.pdf
+            ${{ env.SLUG }}.epub
+            dist/cover_kindle_1600x2560.jpg
+          if-no-files-found: error
+          retention-days: 14
+
+      # Release depuis main seulement — les branches de travail se
+      # contentent de construire et de déposer leurs artefacts.
       - name: Create Release
         if: github.ref == 'refs/heads/main'
         uses: softprops/action-gh-release@v2
@@ -62,6 +104,7 @@ jobs:
           draft: false
           prerelease: false
           files: |
-            ebook_entreprise_liberee_l_envers_du_decor_a5.pdf
-            ebook_entreprise_liberee_l_envers_du_decor_poche.pdf
-            ebook_entreprise_liberee_l_envers_du_decor.epub
+            ${{ env.SLUG }}_a5.pdf
+            ${{ env.SLUG }}_poche.pdf
+            ${{ env.SLUG }}.epub
+            dist/cover_kindle_1600x2560.jpg

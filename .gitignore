@@ -308,3 +308,7 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+
+# Sous-produit de scripts/build_epub.sh : la vignette Kindle est dérivée
+# de images/cover.jpg à chaque construction, elle n'a pas à être versionnée.
+dist/cover_kindle_1600x2560.jpg

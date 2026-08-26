@@ -11,6 +11,18 @@
 set -euo pipefail
 OUT="${1:-book.epub}"
 
+
+# ImageMagick 7 expose « magick », ImageMagick 6 — le paquet des dépôts
+# Ubuntu, donc celui du runner — expose « convert ». On prend ce qui est là.
+if command -v magick >/dev/null 2>&1; then
+  IM=magick
+elif command -v convert >/dev/null 2>&1; then
+  IM=convert
+else
+  echo "erreur : ImageMagick introuvable (ni magick ni convert)" >&2
+  exit 1
+fi
+
 # 1. Source EPUB : le corps du livre sans les couvertures TikZ
 #    (la couverture est fournie à pandoc via --epub-cover-image), et sans
 #    le bloc titre de la page intérieure (pandoc génère sa propre page de
@@ -54,10 +66,20 @@ for f in glob.glob('chapters/*.tex'):
         open(f, 'w').write(out)
 PYEOF
 
-# 3. Images : réduites et converties en JPEG (poids ÷9, qualité liseuse)
-mogrify -resize '1200x1200>' images/*.png
-mogrify -format jpg -quality 85 images/*.png
-sed -i 's/\.png}/.jpg}/g' chapters/*.tex parts/*.tex main_epub_tmp.tex
+# Déclinaison 1600 x 2560 attendue par KDP, produite depuis la couverture en
+# pleine définition — donc avant la réduction pour liseuse. L'aquarelle est en
+# ratio A5 et la cible en 1:1,6 : mise à l'échelle par la hauteur puis rognage
+# symétrique, plutôt que des bandes blanches sur une image pleine page.
+if [ -f images/cover.jpg ]; then
+  mkdir -p dist
+  "$IM" images/cover.jpg -resize 1600x2560^ -gravity center -extent 1600x2560 \
+        -quality 90 dist/cover_kindle_1600x2560.jpg
+fi
+
+# 3. Aquarelles : réduites pour la liseuse. Les sources sont déjà en JPEG
+#    (le PDF garde les pleines définitions), il n'y a plus de conversion
+#    de format ni de réécriture d'extension à faire ici.
+mogrify -resize '1200x1200>' -quality 85 images/*.jpg
 
 # 4. Conversion
 pandoc main_epub_tmp.tex \
