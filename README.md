@@ -54,10 +54,6 @@ java -jar epubcheck.jar livre.epub
 
 La CI ([`build_pdf.yml`](.github/workflows/build_pdf.yml)) fait exactement cela à chaque push et publie une release depuis `main`. Ce workflow est **le même dans les trois livres de l'organisation** — [`organisations-toxiques`](https://github.com/story-d/organisations-toxiques), `envers-du-decor` et [`un-produit-sans-dev`](https://github.com/story-d/un-produit-sans-dev) — à la valeur de `SLUG` près. Un second workflow, [`cleanup.yml`](.github/workflows/cleanup.yml), fait le ménage chaque lundi : artefacts, journaux d'exécution et releases automatiques au-delà des trois dernières.
 
-## Travaux restants avant publication
-
-Le reste-à-faire (couverture haute définition, ISBN, relectures, dépôt légal…) est suivi dans les [issues](https://github.com/story-d/envers-du-decor/issues) du dépôt.
-
 ## Auteur et contact
 
 **Kevin Delfour** — contact : [kevin@delfour.co](mailto:kevin@delfour.co)
